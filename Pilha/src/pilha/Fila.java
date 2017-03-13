@@ -5,31 +5,27 @@
  */
 package pilha;
 
-public class Fila {
-    private int[] vector;
+public class Fila <X>{
+    private Object [] vector;
     private int topo = -1;
     
     public Fila(int tamanhoVetor) throws Exception{
         if(tamanhoVetor < 2)
             throw new Exception ("Capacidade invalido, informe um numero maior que 2");
-        this.vector = new int[tamanhoVetor];
-    }
-
-    Fila() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.vector = new Object [tamanhoVetor];
     }
     
-    public void guarde(int x) throws Exception{
+    public void guarde(X x) throws Exception{
           if (this.topo==this.vector.length-1)
               throw new Exception("Valor maximo da fila ja alcançado "+this.vector.length+"Tente remover alguns valores com o jogueFora");
           this.topo++;
           vector[topo]=x;
      }
 
-     public int recupere() throws Exception{
+     public X recupere() throws Exception{
           if (this.topo <= -1)
               throw new Exception("A fila é vazia portanto tente adicionar novos valores");     
-          return this.vector[0];
+          return (X)this.vector[0];
      }
 
      public void jogueFora() throws Exception{
@@ -47,14 +43,46 @@ public class Fila {
             }
           }
      }
+     
      public String listar() throws Exception{
           if (this.topo <= -1)
               throw new Exception("A fila é vazia portanto tente adicionar novos valores");
-          String texto="Fila \n";
-          for(int i=0;i<this.topo;i++){
-              texto = texto + this.vector[i] + "\n";
+          String texto = "Fila completa: \n";
+          for(int i=0;i<=this.topo;i++){
+              int posicao = i;
+              posicao++;
+              texto += posicao + "º " + this.vector[i] + "\n";
           }
           return texto;
                   
-     }
+    }
+     
+     public String toString(){
+        String texto = "";
+        texto += (this.topo+1)+" elementos(";
+        
+        if(this.topo>-1){
+            texto += " Ultimo valor: " +this.vector[this.topo];  
+            texto += " Primeiro valor: " +this.vector[0] + ")";  
+        }
+        return texto;
+    }
+     
+     public boolean equals(Object obj){
+        if(obj==null)
+            return false;
+        if(this==obj)
+            return true;
+        if(this.getClass()!=obj.getClass())
+            return false;
+        Fila <X> f = (Fila<X>)obj;
+        
+        if(this.topo!=f.topo)
+            return false;
+        for(int i=0; i<= this.topo; i++)
+            if(!this.vector[i].equals(f.vector[i]))
+                return false;
+        
+        return true;
+    }
 }

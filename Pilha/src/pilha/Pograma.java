@@ -5,6 +5,7 @@
  */
 package pilha;
 import java.io.*;
+import java.util.Vector;
 
 /**
  *
@@ -16,42 +17,45 @@ public class Pograma {
         BufferedReader teclado = new BufferedReader( new InputStreamReader(System.in));
         int opcao = -1;
         int i=0;
-        Fila fil = new Fila(12);
         boolean flag = false;
+        
         do{
             try{
             
-                System.out.println("Qual a capacidade da fila?");
+                System.out.println("Qual a capacidade da pilha?");
                 opcao = Integer.parseInt (teclado.readLine());
-                fil = new Fila (opcao);
                 flag=true;
             }catch(Exception e){
                     System.out.println(e);
             }
         }while(flag!=true);
         
+        Pilha <String> pil = new Pilha(opcao);
         do{
             try{
-             System.out.println("Digite sua opção \n 1 guarde novos valores \n 2 jogue fora o primeiro valor \n 3 obtenha o promeiro valor da fila \n 4 encerra o programa \n 5 lista Fila");
+             System.out.println("Digite sua opção \n 1 guarde novos valores \n 2 jogue fora o primeiro valor \n 3 obtenha o promeiro valor da fila \n 4 encerra o programa \n 5 lista Fila \n 6 Para obter os valor do toString da calsse");
              opcao = Integer.parseInt (teclado.readLine());
              switch(opcao){
                   case 1:
                        System.out.println("Digite o valor para guardar");
-                       int valor = Integer.parseInt (teclado.readLine());
-                       fil.guarde(valor);
+                       String valor = teclado.readLine();
+                       pil.guarde(valor);
                        break;
                   case 2:
-                       fil.jogueFora();
+                       pil.jogueFora();
                        System.out.println("Valor Removido");
                        break;
                   case 3:
-                       System.out.println("Valor Recuperado " + fil.recupere());
+                       System.out.println("Valor Recuperado " + pil.recupere());
                        break;
                   case 4:
                        System.out.println("Obrigado por usar esse programa");//sair do programa;
                        break;
                   case 5:
-                       System.out.println(fil.listar());
+                       System.out.println(pil.listar());
+                       break;
+                  case 6:
+                       System.out.println(pil);
                        break;
                   default: System.out.println("Valor invalido") ;//besteira
              }
