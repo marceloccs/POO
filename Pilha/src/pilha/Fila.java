@@ -85,4 +85,16 @@ public class Fila <X>{
         
         return true;
     }
+     
+    public int hashCode(){
+        //int ret = super.hashCode()// quando herdar de alguma classe
+        int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+        
+        ret = 7 * ret + new Integer(this.topo).hashCode();
+        for (int i =0; i<=this.topo;i++){
+            if(this.vector[i]!=null)
+                ret = 7 * ret + this.vector[i].hashCode();
+        }
+        return ret;
+    }
 }

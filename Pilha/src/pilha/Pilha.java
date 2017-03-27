@@ -7,28 +7,57 @@ package pilha;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.*;
+import java.lang.reflect.Method;
 
-public class Pilha <X> {
+public class Pilha <X> implements Cloneable{
     private Object [] vector;
-    private int topo = -1;
+    private int topo;
+    
+    private X clonador(X x) throws Exception{//colocar static
+        if(x instanceof Cloneable){
+              Class <?> classe = x.getClass();
+              Class <?>[] paramFormal = null;
+              Method metodo = classe.getMethod("clone",paramFormal);
+              Object[] paramReal = null;
+              return (X)metodo.invoke(x, paramReal);//.clone();
+        }
+        return x;
+    }
 
+    //Construtor de pilha
+    public Pilha(Pilha<X> modelo)throws Exception{
+        if(modelo==null)
+            throw new Exception("Não é aceito objetos null");
+        
+        for(int i=0;i<=this.topo;i++){
+            this.vector[i] = modelo.vector[i];//.clone();
+        }
+        this.topo = modelo.topo;
+        
+    }
+    
     public Pilha(int tamanhoVetor) throws Exception{
         if(tamanhoVetor < 2)
             throw new Exception ("Capacidade invalido, informe um numero maior que 2");
         this.vector = new Object[tamanhoVetor];
+        this.topo = -1;
     }
     
     public void guarde(X x) throws Exception{
+          if (x==null)
+              throw new Exception("Valor insirido invalido, não pode ser nullo");
           if (this.topo==this.vector.length-1)
               throw new Exception("Valor maximo da pilha ja alcançado "+this.vector.length+"Tente remover alguns valores com o jogueFora()");
           this.topo++;
-          vector[topo]=x;
+          this.vector[this.topo] = this.clonador(x);
+          
      }
 
      public X recupere() throws Exception{
           if (this.topo <= -1)
               throw new Exception("A fila é vazia portanto tente adicionar novos valores");     
-          return (X)this.vector[this.topo];
+          return this.clonador((X) this.vector[this.topo]);
      }
 
      public void jogueFora() throws Exception{
@@ -74,6 +103,28 @@ public class Pilha <X> {
         if(this.topo>-1)
             texto += "Ultimo valor: " +this.vector[this.topo] + ")";  
         return texto;
+    }
+    
+    public int hashCode(){
+        //int ret = super.hashCode()// quando herdar de alguma classe
+        int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+        
+        ret = 7 * ret + new Integer(this.topo).hashCode();
+        for (int i =0; i<=this.topo;i++){
+            if(this.vector[i]!=null)
+                ret = 7 * ret + this.vector[i].hashCode();
+        }
+        return ret;
+    }
+    
+    //public 
+    
+    public Pilha clone(){
+        Pilha<X> ret =null;
+        try{
+            ret = new Pilha<X> (this);
+        }catch(Exception e){}//não vai acontecer
+        return ret;
     }
     
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pilha;
+import pilha.Pilha;
 import java.io.*;
 import java.util.Vector;
 
