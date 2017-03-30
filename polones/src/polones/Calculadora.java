@@ -29,6 +29,7 @@ public class Calculadora {
             throw new Exception("A equação não é compativel");
         this.valorPassado = metodoInfixo;
         String [] partes;
+        //TODO refatorar o tokenizar para tomar cuidado com strings do teclado que não são numeros
         StringTokenizer quebrador = new StringTokenizer (metodoInfixo, "+-*/^()", true);
         pedacos = new String [quebrador.countTokens()];
         pil = new Pilha (quebrador.countTokens());
@@ -49,7 +50,7 @@ public class Calculadora {
             }catch(NumberFormatException e){// caso contrario é um simbulo
                 
                 if(!this.calculador.isValid(pedacos[i]))
-                    throw new Exception("O operador "+pedacos[i]+"não é compativel");
+                    throw new Exception("O operador "+pedacos[i]+" não é compativel");
                 
                 if(pil.getValor()==null) // Primeiro pedaço
                     pil.guarde(pedacos[i]); // guarda o maligno
@@ -57,7 +58,8 @@ public class Calculadora {
                 else{
                     String aux = pedacos[i];//armazena o pedaco em uma variavel auxiliar
                     boolean flagParentes = false;
-                    if(aux.equals(")")){  
+                    if(aux.equals(")")){
+                        //TODO: Verificar se tem o ( na fila
                         do{
                            if(pil.getValor().equals("(")){
                                 flagParentes=true;
