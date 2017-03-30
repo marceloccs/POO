@@ -39,28 +39,6 @@ public class Pilha <X> {
           this.topo++;
           this.vector[topo] = x;//.clone();
      }
-    /**
-     * função que retorna o ultimo valor da pilha.
-     * 
-     * @return null se não possui elementos dentro da pilha ou retorna o valor do topo da pilha;
-     */
-     public X getUltimo(){
-          if (this.topo <= -1)
-              return null;
-          
-          return (X)this.vector[this.topo];//.clone();
-     }
-    /**
-     * função que retorna o primeiro valor da pilha.
-     * 
-     * @return null se não possui mais elemanto dentro da pilha ou retorna o valor do topo da pilha;
-     */
-     public X getPriemiro(){
-          if (this.topo <= -1)
-              return null;
-          
-          return (X)this.vector[0];//.clone();
-     }
      
      /**
      * função que retorna o ultimo valor da pilha.
@@ -112,7 +90,7 @@ public class Pilha <X> {
      * @throws Exception caso a pilha estiver vazia lança uma execção
      */
     
-    public String listar() throws Exception{
+    /*public String listar() throws Exception{
           if (this.topo <= -1)
               throw new Exception("A fila é vazia portanto tente adicionar novos valores");
           String texto = "Pilha completa: \n";
@@ -123,8 +101,8 @@ public class Pilha <X> {
           }
           return texto;
                   
-    }
-    
+    }*/
+    public Pilha clone(){}
     public String toString(){
         String texto = "";
         texto += (this.topo+1)+" elementos(";

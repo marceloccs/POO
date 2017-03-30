@@ -36,43 +36,6 @@ public class Fila <X>{
           this.topo++;
           this.vector[topo] = x;//.clone();
     }
-
-    /**
-     * função que retorna o primeiro valor da fila.
-     * 
-     * @return null se não possui mais elemanto dentro da pilha ou retorna o valor do topo da pilha;
-     */
-    
-     public X recuperePrimeiro() throws Exception{
-          if (this.topo <= -1)
-              return null;
-          return (X)this.vector[0];
-     }
-     
-     /**
-     * função que retorna o primeiro valor da fila.
-     * 
-     * @return null se não possui mais elemanto dentro da pilha ou retorna o valor do topo da pilha;
-     */
-    
-     public X getPrimeiro() throws Exception{
-          if (this.topo <= -1)
-              return null;
-          return (X)this.vector[0];
-     }
-     
-     /**
-     * função que retorna o ultimo valor da fila.
-     * 
-     * @return null se não possui mais elemanto dentro da pilha ou retorna o valor do topo da pilha;
-     */
-    
-     public X getUltimo() throws Exception{
-          if (this.topo <= -1)
-              return null;
-          return (X)this.vector[this.topo];
-     }
-     
      /**
      * função que retorna o primeiro valor da fila.
      * 
@@ -116,7 +79,7 @@ public class Fila <X>{
      * @return String com todas as posições e os valores dentro da pilha
      * @throws Exception caso a pilha estiver vazia lança uma execção
      */
-     public String listar() throws Exception{
+     /*private String listar() throws Exception{
           if (this.topo <= -1)
               throw new Exception("A fila é vazia portanto tente adicionar novos valores");
           String texto = "Fila completa: \n";
@@ -127,9 +90,11 @@ public class Fila <X>{
           }
           return texto;
                   
-    }
+    }*/
      
-     public String toString(){
+    public Fila clone(){}
+     
+    public String toString(){
         String texto = "";
         texto += (this.topo+1)+" elementos(";
         

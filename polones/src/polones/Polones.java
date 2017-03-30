@@ -38,7 +38,7 @@ public class Polones {
         }while(!(linha.equals("sair")));
         System.out.println("Obrigado por usar o nosso programa"
                 + "\n Marcelo Custodio"
-                + "\n Rodigo Baptista");
+                + "\n Rodrigo Baptista");
     }
     
 }

@@ -146,12 +146,34 @@ public class Calculadora {
         texto+= "Resultado final: "+this.resultado +"\n String recebida: "+this.valorPassado+"\n Valor pós: "+this.filaOrganizada;
         return texto;
     }
+    public Fila clone(){}
+     
+    public Integer compareTo(){}
+     
+     public boolean equals(Object obj){
+        if(obj==null)
+            return false;
+        if(this==obj)
+            return true;
+        if(this.getClass()!=obj.getClass())
+            return false;
+        return true;
+    }
+     
+    public int hashCode(){
+        //int ret = super.hashCode()// quando herdar de alguma classe
+        int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+        
+        //Fazer um loop com a matriz e com o vector;
+        for (int i =0; i<=this.topo;i++){
+            if(this.vector[i]!=null)
+                ret = 7 * ret + this.vector[i].hashCode();
+        }
+        return ret;
+    }
     
     public String teste() throws Exception{
         String texto = "";
-        
-        /*texto += pil.listar();
-        texto += fil.listar();*/
         texto+= this.resultado;
         return texto;
     }

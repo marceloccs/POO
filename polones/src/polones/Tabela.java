@@ -21,14 +21,13 @@ public class Tabela {
             {false,false,false,false,true,true,true},//-
             {false,false,false,false,false,false,false},//)
         };
-    static String [] simbulos = new String[] {"(","^","*","/","+","-",")"};
+    private String [] simbulos = new String[] {"(","^","*","/","+","-",")"};
     public Tabela(){}
     
     public boolean getValor(String linha, String coluna) throws Exception{
         int y = this.getNumero(coluna);
         int x = this.getNumero(linha);
-        boolean valor; 
-        //if (Arrays.asList(tabela).contains("whatever"))
+        boolean valor;
         valor = tabela[x][y];
         return valor;
     }
@@ -61,6 +60,41 @@ public class Tabela {
         if (retorno==-1)
             throw new Exception ("simbulo não é numero e nem se encontra dentro dos valores correspondetes da tabela, consulte ela");
         return retorno;
+    }
+    
+    public Fila clone(){}
+     
+    public String toString(){
+        String texto = "";
+        texto += (this.topo+1)+" elementos(";
+        
+        if(this.topo>-1){
+            texto += " Ultimo valor: " +this.vector[this.topo];  
+            texto += " Primeiro valor: " +this.vector[0] + ")";  
+        }
+        return texto;
+    }
+     
+     public boolean equals(Object obj){
+        if(obj==null)
+            return false;
+        if(this==obj)
+            return true;
+        if(this.getClass()!=obj.getClass())
+            return false;
+        return true;
+    }
+     
+    public int hashCode(){
+        //int ret = super.hashCode()// quando herdar de alguma classe
+        int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+        
+        ret = 7 * ret + new Integer(this.topo).hashCode();
+        for (int i =0; i<=this.topo;i++){
+            if(this.vector[i]!=null)
+                ret = 7 * ret + this.vector[i].hashCode();
+        }
+        return ret;
     }
     
 }
