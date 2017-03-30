@@ -84,7 +84,6 @@ public class Operadores {
         if(this.getClass()!=obj.getClass())
             return false;
         return true;
-     
      }
      
     public int hashCode(){

@@ -39,7 +39,7 @@ public class Pilha <X> {
           this.topo++;
           this.vector[topo] = x;//.clone();
      }
-     
+    
      /**
      * função que retorna o ultimo valor da pilha.
      * 
