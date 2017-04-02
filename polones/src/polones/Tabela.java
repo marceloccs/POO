@@ -64,7 +64,12 @@ public class Tabela {
     
     public Fila clone(){}
      
-    public String toString(){}
+    public String toString(){
+        String texto = "Caracteres permitidos:";
+        for(int i=0; i<=this.simbulos.length;i++)
+            texto+= this.simbulos[i]+ " ";
+        
+    }
      
      public boolean equals(Object obj){
         if(obj==null)
@@ -81,9 +86,13 @@ public class Tabela {
         int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
         
         //Fazer um loop com a matriz e com o vector;
-        for (int i =0; i<=this.topo;i++){
-            if(this.vector[i]!=null)
-                ret = 7 * ret + this.vector[i].hashCode();
+        for (int i =0; i<=7;i++){
+            ret = 7 * ret + this.simbulos[i].hashCode();
+        }
+        for (int i =0; i<=7;i++){
+            for (int y =0; y<=7;y++){
+                 ret = 7 * ret + new Boolean(this.tabela[i][y]).hashCode();
+            }
         }
         return ret;
     }

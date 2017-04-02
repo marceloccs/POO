@@ -166,11 +166,15 @@ public class Calculadora {
         //int ret = super.hashCode()// quando herdar de alguma classe
         int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
         
-        //Fazer um loop com a matriz e com o vector;
-        for (int i =0; i<=this.topo;i++){
-            if(this.vector[i]!=null)
-                ret = 7 * ret + this.vector[i].hashCode();
-        }
+        ret = 7 * ret + this.pil.hashCode();
+        ret = 7 * ret + this.calculadora.hashCode();
+        ret = 7 * ret + this.fil.hashCode();
+        ret = 7 * ret + new Double (this.resultado).hashCode();
+        ret = 7 * ret + this.pedacos.hashCode();
+        ret = 7 * ret + this.tabela.hashCode();
+        ret = 7 * ret + this.calculador.hashCode();
+        ret = 7 * ret + this.valorPassado.hashCode();
+        ret = 7 * ret + this.filaOrganizada.hashCode();
         return ret;
     }
     
