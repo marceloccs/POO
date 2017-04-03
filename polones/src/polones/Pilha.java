@@ -83,26 +83,26 @@ public class Pilha <X> {
         return true;
     }
     
-    /**
-     * retona uma lista com os valores da pilha
-     * 
-     * @return String com todas as posições e os valores dentro da pilha
-     * @throws Exception caso a pilha estiver vazia lança uma execção
-     */
+  //Construtor de Clone
+    public Pilha(Pilha<X> modelo)throws Exception{
+        if(modelo==null)
+            throw new Exception("N�o � aceito objetos null");
+        
+        for(int i=0;i<=this.topo;i++){
+            this.vector[i] = modelo.vector[i];//.clone();
+        }
+        this.topo = modelo.topo;
+        
+    }
     
-    /*public String listar() throws Exception{
-          if (this.topo <= -1)
-              throw new Exception("A fila é vazia portanto tente adicionar novos valores");
-          String texto = "Pilha completa: \n";
-          for(int i=0;i<=this.topo;i++){
-              int posicao = i;
-              posicao++;
-              texto += posicao + "º " + this.vector[i] + "\n";
-          }
-          return texto;
-                  
-    }*/
-    public Pilha clone(){}
+    public Pilha clone(){
+    	Pilha<X> ret =null;
+        try{
+            ret = new Pilha<X> (this);
+        }catch(Exception e){}//n�o vai acontecer
+        return ret;
+    }
+    
     public String toString(){
         String texto = "";
         texto += (this.topo+1)+" elementos(";
