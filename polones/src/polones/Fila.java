@@ -5,7 +5,7 @@
  */
 package polones;
 
-public class Fila <X>{
+public class Fila <X> implements Cloneable{
     private Object [] vector;
     private int topo = -1;
     
@@ -92,7 +92,26 @@ public class Fila <X>{
                   
     }*/
      
-    public Fila clone(){}
+     
+     //Construtor de Clone
+    public Fila(Fila<X> modelo)throws Exception{
+        if(modelo==null)
+            throw new Exception("N�o � aceito objetos null");
+        
+        for(int i=0;i<=this.topo;i++){
+            this.vector[i] = modelo.vector[i];//.clone();
+        }
+        this.topo = modelo.topo;
+        
+    }
+    
+    public Fila clone(){
+    	Fila<X> ret =null;
+        try{
+            ret = new Fila<X> (this);
+        }catch(Exception e){}//n�o vai acontecer
+        return ret;
+    }
      
     public String toString(){
         String texto = "";

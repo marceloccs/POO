@@ -13,24 +13,27 @@ import polones.Fila;
  *
  * @author Ultron
  */
-public class Calculadora {
+public class Calculadora implements Cloneable{
     private Pilha <String> pil;//pilha de organização
     private Pilha <Double> calculadora;//pilha de calculo
     private Fila <String> fil;//good
     private double resultado;
     private String [] pedacos;
-    static Tabela tabela = new Tabela();
-    static Operadores calculador = new Operadores();
+    private Tabela tabela = new Tabela();
+    private Operadores calculador = new Operadores();
     private String valorPassado;
     private String filaOrganizada;
     
     public Calculadora(String metodoInfixo) throws Exception{
         if((metodoInfixo==null)||(metodoInfixo.equals(" ")))
-            throw new Exception("A equação não é compativel");
+            throw new Exception("A equação não pode ser vazia");
         this.valorPassado = metodoInfixo;
         String [] partes;
         //TODO refatorar o tokenizar para tomar cuidado com strings do teclado que não são numeros
-        StringTokenizer quebrador = new StringTokenizer (metodoInfixo, "+-*/^()", true);
+        StringTokenizer quebrador = new StringTokenizer (metodoInfixo, "qawsedrftgyhujikolpçzxcvbnm"
+                + "AWERTYUIOPASDFGHJKLÇZXCVBNM"
+                + "<>,.;:~]}ºª{[=§_&¨¬$£#³²@¹!%¢|"
+                + "+-/^*()", true);
         pedacos = new String [quebrador.countTokens()];
         pil = new Pilha (quebrador.countTokens());
         fil = new Fila (quebrador.countTokens());
@@ -50,7 +53,7 @@ public class Calculadora {
             }catch(NumberFormatException e){// caso contrario é um simbulo
                 
                 if(!this.calculador.isValid(pedacos[i]))
-                    throw new Exception("O operador "+pedacos[i]+" não é compativel");
+                    throw new Exception("O caracter '"+pedacos[i]+"' não é compativel para um operador");
                 
                 if(pil.getValor()==null) // Primeiro pedaço
                     pil.guarde(pedacos[i]); // guarda o maligno
@@ -59,16 +62,22 @@ public class Calculadora {
                     String aux = pedacos[i];//armazena o pedaco em uma variavel auxiliar
                     boolean flagParentes = false;
                     if(aux.equals(")")){
-                        //TODO: Verificar se tem o ( na fila
-                        do{
+                        try{
+                            do{
                            if(pil.getValor().equals("(")){
                                 flagParentes=true;
                                 pil.jogueFora();
-                           }else{
-                                fil.guarde(pil.jogueFora());
-                           }
-                        }while(flagParentes!=true);
+                            }else{
+                               if(pil.getValor()!=null)
+                                    fil.guarde(pil.jogueFora());
+                               else
+                                   throw new Exception("A equação não abriu e fechou os pareteses corretamente.");
+                                }
+                            }while(flagParentes!=true);
                         aux = pil.jogueFora();
+                        }catch(NullPointerException ne){
+                            throw new Exception("A equação não abriu e fechou os pareteses corretamente.");
+                        }
                     }
                     do{
                         if(pil.getValor()!=null){
@@ -148,9 +157,29 @@ public class Calculadora {
         texto+= "Resultado final: "+this.resultado +"\n String recebida: "+this.valorPassado+"\n Valor pós: "+this.filaOrganizada;
         return texto;
     }
-    public Fila clone(){}
-     
-    public Integer compareTo(){}
+    
+    public Calculadora(Calculadora calc) throws Exception{
+        if(calc==null)
+            throw new Exception("Não é aceito objetos null");
+        
+        this.calculadora = calc.calculadora;
+        this.fil = calc.fil;
+        this.calculador = calc.calculador;
+        this.filaOrganizada = calc.filaOrganizada;
+        this.pedacos = calc.pedacos;
+        this.pil = calc.pil;
+        this.resultado = calc.resultado;
+        this.tabela = calc.tabela;
+        this.valorPassado = calc.valorPassado;
+    }
+    
+    public Calculadora clone(){
+        Calculadora ret =null;
+        try{
+            ret = new Calculadora (this);
+        }catch(Exception e){}//não vai acontecer
+        return ret;
+    }
      
      public boolean equals(Object obj){
         if(obj==null)
@@ -159,6 +188,26 @@ public class Calculadora {
             return true;
         if(this.getClass()!=obj.getClass())
             return false;
+        Calculadora p = (Calculadora)obj;
+        if(this.calculadora != p.calculadora)
+            return false;
+        if(this.fil != p.fil)
+            return false;
+        if(this.calculador != p.calculador)
+            return false;
+        if(this.filaOrganizada != p.filaOrganizada)
+            return false;
+        if(this.pedacos != p.pedacos)
+            return false;
+        if(this.pil != p.pil)
+            return false;
+        if(this.resultado != p.resultado)
+            return false;
+        if(this.tabela != p.tabela)
+            return false;
+        if(this.valorPassado != p.valorPassado)
+            return false;
+        
         return true;
     }
      

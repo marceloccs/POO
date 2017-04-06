@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.lang.*;
 
-public class Pilha <X> {
+public class Pilha <X>  implements Cloneable{
     private Object [] vector;
     private int topo = -1;
 
@@ -86,7 +86,7 @@ public class Pilha <X> {
   //Construtor de Clone
     public Pilha(Pilha<X> modelo)throws Exception{
         if(modelo==null)
-            throw new Exception("Não é aceito objetos null");
+            throw new Exception("Nï¿½o ï¿½ aceito objetos null");
         
         for(int i=0;i<=this.topo;i++){
             this.vector[i] = modelo.vector[i];//.clone();
@@ -99,7 +99,7 @@ public class Pilha <X> {
     	Pilha<X> ret =null;
         try{
             ret = new Pilha<X> (this);
-        }catch(Exception e){}//não vai acontecer
+        }catch(Exception e){}//nï¿½o vai acontecer
         return ret;
     }
     

@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author Ultron
  */
-public class Tabela {
+public class Tabela  implements Cloneable{
     private boolean [][] tabela = new boolean[][] {
             {false,false,false,false,false,false,true},//(
             {false,true,true,true,true,true,true},//^
@@ -62,12 +62,26 @@ public class Tabela {
         return retorno;
     }
     
-    public Fila clone(){}
+    //Construtor de Clone
+    public Tabela(Tabela modelo)throws Exception{
+        if(modelo==null)
+            throw new Exception("N�o � aceito objetos null");        
+    }
+    
+    public Tabela clone(){
+    Tabela ret =null;
+        try{
+            ret = new Tabela (this);
+        }catch(Exception e){}//n�o vai acontecer
+        return ret;
+    }
      
     public String toString(){
         String texto = "Caracteres permitidos:";
         for(int i=0; i<=this.simbulos.length;i++)
             texto+= this.simbulos[i]+ " ";
+        
+        return texto;
         
     }
      

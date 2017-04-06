@@ -11,10 +11,15 @@ import java.util.Arrays;
  *
  * @author Ultron
  */
-public class Operadores {
+public class Operadores  implements Cloneable{
     private String[] validos = {"+","-","/","*","^"};
     
     public Operadores() {}
+    //Construtor de Clone
+    public Operadores(Operadores modelo)throws Exception{
+        if(modelo==null)
+            throw new Exception("N�o � aceito objetos null");        
+    }
     
     public boolean isValid(String operador){
         if(operador.equals("*")){
@@ -63,7 +68,13 @@ public class Operadores {
         return resultado;
     }
     
-    public Fila clone(){}
+    public Operadores clone(){
+    Operadores ret =null;
+        try{
+            ret = new Operadores (this);
+        }catch(Exception e){}//n�o vai acontecer
+        return ret;
+    }
      
     public String toString(){
         String texto = "";
