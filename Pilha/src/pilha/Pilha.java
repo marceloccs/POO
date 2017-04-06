@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -25,7 +25,7 @@ public class Pilha <X> implements Cloneable{
         return x;
     }
 
-    //Construtor de pilha
+    //Construtor de Clone
     public Pilha(Pilha<X> modelo)throws Exception{
         if(modelo==null)
             throw new Exception("Não é aceito objetos null");
