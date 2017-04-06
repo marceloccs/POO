@@ -5,14 +5,14 @@
  */
 package horario;
 
-import pilha.Pilha;
+import horario.ConstanteTempo;
 
 /**
  *
  * @author Ultron
  */
 public class Horario implements Comparable<Horario>, Cloneable{
-    
+    private final ConstanteTempo cons = new ConstanteTempo();
     private int hora,minutos,segundos;
     
     public Horario(int h,int m, int s) throws Exception{
@@ -43,6 +43,12 @@ public class Horario implements Comparable<Horario>, Cloneable{
         if(s<0)
             throw new Exception("Segundos não pode ser nula");
         this.segundos = s;
+    }
+    public int convertSegMinutos(int s){
+        int ret=0;
+        int minutes = s / cons.segundosMinutos;
+        int seconds = s % cons.segundosMinutos;
+        return ret;
     }
     public String toString(){
         String texto= "";
