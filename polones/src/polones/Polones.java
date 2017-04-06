@@ -33,7 +33,7 @@ public class Polones {
                 System.out.println("Resultado:" + calc.toString());
              }
             }catch(Exception e){
-                    System.out.println(e);
+                    System.out.println(e.getMessage());
             }
         }while(!(linha.equals("sair")));
         System.out.println("Obrigado por usar o nosso programa"

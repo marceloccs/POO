@@ -176,7 +176,7 @@ public class Fila <X> implements Cloneable{
         return ret;
     }
     
-    public String imprimir(){
+    private String imprimir(){
         String texto = "";
           for(int i=0;i<=this.topo;i++){
               int posicao = i;

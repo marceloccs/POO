@@ -100,7 +100,7 @@ public class Calculadora implements Cloneable{
                 fil.guarde(pil.jogueFora());
             }
         }
-        this.filaOrganizada = fil.imprimir();
+        //this.filaOrganizada = fil.imprimir();
         calcular();
     }
     private void calcular() throws Exception{
@@ -154,7 +154,7 @@ public class Calculadora implements Cloneable{
     
     public String toString(){
         String texto = "";
-        texto+= "Resultado final: "+this.resultado +"\n String recebida: "+this.valorPassado+"\n Valor pós: "+this.filaOrganizada;
+        texto+= "Resultado final: "+this.resultado +"\n String recebida: "+this.valorPassado;//+"\n Valor pós: "+this.filaOrganizada;
         return texto;
     }
     
