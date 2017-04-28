@@ -8,6 +8,7 @@ package labirinto;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Vector;
 
 /**
@@ -113,5 +114,44 @@ public class LeitorArquivo {
         return "Local do arquivo: "+this.fileName+"\n"
         + "Numero de linhas: "+this.conteudo.size()+"\n"
         + "Arquivo Lido: "+this.getConteudoString();
+    }
+    
+    public int hashCode(){
+        int ret=666;
+        ret = ret * 7 + this.conteudo.hashCode();
+        ret = ret * 7 + this.fileName.hashCode();
+        return ret;
+    }
+    
+    public boolean equals(Object obj){
+        if(obj ==null)
+            return false;
+        if(obj==this)
+            return false;
+        if(obj.getClass() != this.getClass())
+            return false;
+        LeitorArquivo aux = (LeitorArquivo)obj;
+        if(aux.conteudo.equals(aux.conteudo))
+            return false;
+        if(aux.fileName.equals(aux.fileName))
+            return false;
+        
+        return true;
+    }
+    
+    public LeitorArquivo clone(){
+        LeitorArquivo ret =null;
+        try{
+            ret = new LeitorArquivo(this);
+        }catch(Exception e){}
+        
+        return ret;
+    }
+    
+    public LeitorArquivo(LeitorArquivo lei)throws Exception{
+        if(lei==null)
+            throw new Exception("objeto não pode ser nulo");
+        this.conteudo=lei.conteudo;
+        this.fileName=lei.fileName;
     }
 }
