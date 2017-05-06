@@ -3,11 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package polones;
+package labirinto;
+
+import java.lang.reflect.Method;
 
 public class Fila <X> implements Cloneable{
     private Object [] vector;
     private int topo = -1;
+    
+    private X clonador(X x) throws Exception{//colocar static
+        if(x instanceof Cloneable){
+              Class <?> classe = x.getClass();
+              Class <?>[] paramFormal = null;
+              Method metodo = classe.getMethod("clone",paramFormal);
+              Object[] paramReal = null;
+              return (X)metodo.invoke(x, paramReal);//.clone();
+        }
+        return x;
+    }
     
     /**
      * Instancia a Fila
@@ -34,7 +47,7 @@ public class Fila <X> implements Cloneable{
           if (this.topo==this.vector.length-1)
               throw new Exception("Valor maximo da pilha ja alcançado "+this.vector.length+"Tente remover alguns valores com o jogueFora()");
           this.topo++;
-          this.vector[topo] = x;//.clone();
+          this.vector[topo] = this.clonador(x);//.clone();
     }
      /**
      * função que retorna o primeiro valor da fila.
@@ -45,7 +58,7 @@ public class Fila <X> implements Cloneable{
      public X getValor() throws Exception{
           if (this.topo <= -1)
               return null;
-          return (X)this.vector[0];
+          return this.clonador((X)this.vector[0]);
      }
 
      
@@ -70,7 +83,7 @@ public class Fila <X> implements Cloneable{
             }
             this.topo--;
           }
-          return (X)valor;
+          return this.clonador((X)valor);
      }
      
      /**
@@ -99,7 +112,7 @@ public class Fila <X> implements Cloneable{
             throw new Exception("N�o � aceito objetos null");
         
         for(int i=0;i<=this.topo;i++){
-            this.vector[i] = modelo.vector[i];//.clone();
+            this.vector[i] = this.clonador((X)modelo.vector[i]);//.clone();
         }
         this.topo = modelo.topo;
         
@@ -176,7 +189,7 @@ public class Fila <X> implements Cloneable{
         return ret;
     }
     
-    private String imprimir(){
+    /*private String imprimir(){
         String texto = "";
           for(int i=0;i<=this.topo;i++){
               int posicao = i;
@@ -184,5 +197,5 @@ public class Fila <X> implements Cloneable{
               texto +=this.vector[i]+" ";
           }
           return texto;
-    }
+    }*/
 }

@@ -6,8 +6,8 @@
 package polones;
 import static java.lang.Math.exp;
 import java.util.StringTokenizer;
-import polones.Pilha;
-import polones.Fila;
+import labirinto.Pilha;
+import labirinto.Fila;
 
 /**
  *

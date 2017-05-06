@@ -9,7 +9,7 @@ package labirinto;
  *
  * @author Ultron
  */
-public class Cordenadas {
+public class Cordenadas implements Cloneable{
     private int x;
     private int y;
     
@@ -27,13 +27,13 @@ public class Cordenadas {
         return this.y;
     }
     public void setX(int x) throws Exception{
-        if(x<0)
-            throw new Exception("valor do X não pode ser negativo");
+        /*if(x<0)
+            throw new Exception("valor do X não pode ser negativo");*/
         this.x=x;
     }
     public void setY(int y) throws Exception{
-        if(y<0)
-            throw new Exception("valor do Y não pode ser negativo");
+        /*if(y<0)
+            throw new Exception("valor do Y não pode ser negativo");*/
         this.y=y;
     }
     

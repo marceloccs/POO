@@ -12,10 +12,11 @@ import java.util.Vector;
  *
  * @author Ultron
  */
-public class Mapa {
+public class Mapa implements Cloneable{
     private String mapa[][];
     private int linhas;
     private int colunas;
+    private Cordenadas entrada;
     
     public Mapa(Vector <String> mapaNaoTratado) throws CloneNotSupportedException, Exception{
         try {
@@ -33,34 +34,72 @@ public class Mapa {
     public String getPosicao(Cordenadas cordenada){
         return this.mapa[cordenada.getX()][cordenada.getY()];
     }
-    public Vector<Cordenadas> getMovimentos(Cordenadas cordenada) throws Exception{
-        Vector <Cordenadas> ret = new Vector();
-        int i=0;
-        String posicaoatual = this.mapa[cordenada.getX()][cordenada.getY()];
+    
+    public String toString(){
+        String ret = "mapa: \n";
+        for(int i=0; i<this.colunas;i++){
+            for(int y = 0; y<this.linhas;y++){
+                ret += this.mapa[i][y];
+            }
+            ret += "\n";
+        }
+        ret += "\n";
+        ret +="Entrada: " +this.entrada.toString();
+        ret +="\nLinhas: " +this.linhas;
+        ret +="\nColunas: " +this.colunas;
+        return ret;
+    }
+    
+    public Cordenadas setCaractere(Cordenadas cor, String caracter) throws CloneNotSupportedException{
+        this.mapa[cor.getX()][cor.getY()] = caracter;
+        return cor;
+    }
+    
+    /*public Cordenadas cameBack(Cordenadas came){
+        
+        return came;
+    }*/
+    
+    public Fila<Cordenadas> getMovimentos(Cordenadas cordenada) throws Exception{
+        Fila <Cordenadas> ret = new Fila(4);
+        //String posicaoatual = this.mapa[cordenada.getX()][cordenada.getY()];
         Cordenadas auxCima = new Cordenadas(cordenada.getX(),(cordenada.getY() + 1));
         Cordenadas auxBaixo = new Cordenadas(cordenada.getX(),(cordenada.getY() - 1));
         Cordenadas auxEsquerda = new Cordenadas((cordenada.getX() - 1),cordenada.getY());
         Cordenadas auxDireita = new Cordenadas((cordenada.getX() + 1),(cordenada.getY()));
         
-        if(!posicaoatual.equals(" "))
-            throw new Exception("Posição invalida para movimentação");
+        /*if(!posicaoatual.equals(" "))
+            throw new Exception("Posição invalida para movimentação");*/
+        try{
+            if (this.mapa[auxCima.getX()][auxCima.getY()].equals(" ")||this.mapa[auxCima.getX()][auxCima.getY()].equals("S")){
+                ret.guarde(auxCima);}
+        }catch(Exception e){}
+        try{
+        if (this.mapa[auxBaixo.getX()][auxBaixo.getY()].equals(" ")||this.mapa[auxBaixo.getX()][auxBaixo.getY()].equals("S")){
+            ret.guarde(auxBaixo);}}catch(Exception e){}
         
-        if (!this.mapa[auxCima.getX()][auxCima.getY()].equals("#"))
-            ret.add(auxCima);
+        try{
+        if (this.mapa[auxEsquerda.getX()][auxEsquerda.getY()].equals(" ")||this.mapa[auxEsquerda.getX()][auxEsquerda.getY()].equals("S")){
+            ret.guarde(auxEsquerda);}}catch(Exception e){}
         
-        if (!this.mapa[auxBaixo.getX()][auxBaixo.getY()].equals("#"))
-            ret.add(auxBaixo);
-        
-        if (!this.mapa[auxEsquerda.getX()][auxEsquerda.getY()].equals("#"))
-            ret.add(auxEsquerda);
-        
-        if (!this.mapa[auxCima.getX()][auxCima.getY()].equals("#"))
-            ret.add(auxDireita);
+        try{
+        if (this.mapa[auxDireita.getX()][auxDireita.getY()].equals(" ")||this.mapa[auxDireita.getX()][auxDireita.getY()].equals("S")){
+            ret.guarde(auxDireita);}}catch(Exception e){}
         
         return ret;
     }
-    public void setMapa(Vector <String> mapa){
-        this.mapa = (String[][]) mapa.toArray();
+    public void setMapa(Vector <String> mapa) throws Exception{
+        String linhas [] = new String[mapa.size()]; //split
+        linhas = mapa.toArray(new String[mapa.size()]);
+        this.mapa = new String[this.linhas][this.colunas];
+        //this.mapa =
+        for(int i=0;i<linhas.length;i++){
+            String aux[];
+            aux = linhas[i].split("(?!^)");
+            this.mapa[i]=aux;
+            //System.out.println(aux);
+        }
+        this.procuraEntrada();
     }
     public void setLinhas(int linhas){
         this.linhas=linhas;
@@ -109,5 +148,43 @@ public class Mapa {
         this.colunas=map.colunas;
         this.linhas=map.linhas;
         this.mapa=map.mapa;
+        this.entrada = map.entrada;
+    }
+    public int getLinhas(){
+        return this.linhas;
+    }
+    public int getColunas(){
+        return this.colunas;
+    }
+    public Cordenadas getEntrada(){
+        return this.entrada;
+    }
+    private void procuraEntrada() throws Exception{
+        int i=0;
+        int y=0;
+        int limite = this.colunas;
+        limite--;
+        for(i=0;i<this.colunas;i++){
+            if(i==limite||i==0){
+                for(y=0; y >this.linhas;y++){
+                    if(this.mapa[i][y].equals("E")){
+                        this.entrada = new Cordenadas(i,y);
+                        break;
+                    }
+                }
+            }else{
+                if(this.mapa[i][0].equals("E")){
+                    this.entrada = new Cordenadas(i,y);
+                    break;
+                }
+                if(this.mapa[i][limite].equals("E")){
+                    this.entrada = new Cordenadas(i,y);
+                    break;
+                }
+            }
+        }
+        if(this.entrada.equals(null)){
+            throw new Exception("Não foi possivel achar entrada");
+        }
     }
 }

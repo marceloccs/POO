@@ -16,7 +16,7 @@ import java.util.Vector;
  * 
  * @author Ultron
  */
-public class LeitorArquivo {
+public class LeitorArquivo implements Cloneable{
     private String fileName;
     private Vector<String> conteudo;
     

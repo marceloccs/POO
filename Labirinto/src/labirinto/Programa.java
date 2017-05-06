@@ -17,9 +17,12 @@ public class Programa {
     public static void main(String[] args) {
         try{
             LeitorArquivo reader = new LeitorArquivo("E:\\test.txt");
-            System.out.println(reader.getConteudoString());
+            //System.out.println(reader.getConteudoString());
+            Mapa mapa = new Mapa(reader.getConteudo());
+            ProcuradorCaminho caminho = new ProcuradorCaminho(mapa);
+            System.out.println(caminho.toString());
         }catch(Exception erro){
-            System.err.println(erro);
+            System.err.println(erro.getMessage());
         }
     }
     
