@@ -18,6 +18,12 @@ public class Mapa implements Cloneable{
     private int colunas;
     private Cordenadas entrada;
     
+    /**
+     * constroi a classe de mapa
+     * @param mapaNaoTratado um Vector do arquivo lido com as primeiras linhas com coluna e linhas e as proximas com o mapa
+     * @throws CloneNotSupportedException
+     * @throws Exception 
+     */
     public Mapa(Vector <String> mapaNaoTratado) throws CloneNotSupportedException, Exception{
         try {
             int linhaInt = Integer.parseInt(mapaNaoTratado.firstElement());
@@ -31,10 +37,19 @@ public class Mapa implements Cloneable{
         }
         this.setMapa(mapaNaoTratado);
     }
+    /**
+     * Troca o caracter da posição das cordenadas que foram enviadas
+     * 
+     * @param cordenada cordenada que deseja ver o caracter
+     * @return caracter que foi encontrado na cordenada
+     */
     public String getPosicao(Cordenadas cordenada){
         return this.mapa[cordenada.getX()][cordenada.getY()];
     }
-    
+    /**
+     * 
+     * @return dados da classe que são utilixzadas
+     */
     public String toString(){
         String ret = "mapa: \n";
         for(int i=0; i<this.colunas;i++){
@@ -49,12 +64,25 @@ public class Mapa implements Cloneable{
         ret +="\nColunas: " +this.colunas;
         return ret;
     }
-    
+    /**
+     * ele muda o caracter das cordenadas indicadas
+     * 
+     * @param cor cordenada da onde vai mudar o caracter
+     * @param caracter caracter que vai ser mudado
+     * @return cordenada da onde foi mudado
+     * @throws CloneNotSupportedException 
+     */
     public Cordenadas setCaractere(Cordenadas cor, String caracter) throws CloneNotSupportedException{
         this.mapa[cor.getX()][cor.getY()] = caracter;
         return cor;
     }
-    
+    /**
+     * Função que procura o * mais em posições adacentes e retorna essa casa, ele retorna o primeiro encontrado
+     * 
+     * @param atual cordenadas da onde vc deseja rtornar
+     * @return cordenadas que foir retornada
+     * @throws Exception 
+     */
     public Cordenadas cameBack(Cordenadas atual) throws Exception{
         Cordenadas auxCima = new Cordenadas(atual.getX(),(atual.getY() + 1));
         Cordenadas auxBaixo = new Cordenadas(atual.getX(),(atual.getY() - 1));
@@ -81,7 +109,12 @@ public class Mapa implements Cloneable{
         
         return null;
     }
-    
+    /**
+     * Pega a posição desejada e retorna todas as posições possivies, caso não ache nehuma retorna uma fila nulla
+     * @param cordenada cordenada atual ou que você deseja visualizar a movimentação
+     * @return Fila de coordenadas possiveis
+     * @throws Exception 
+     */
     public Fila<Cordenadas> getMovimentos(Cordenadas cordenada) throws Exception{
         Fila <Cordenadas> ret = new Fila(4);
         //String posicaoatual = this.mapa[cordenada.getX()][cordenada.getY()];
@@ -110,7 +143,13 @@ public class Mapa implements Cloneable{
         
         return ret;
     }
-    public void setMapa(Vector <String> mapa) throws Exception{
+    /**
+     * Tranforma o objeto vector em array do mapa
+     * 
+     * @param mapa Vector do arquivo lido
+     * @throws Exception 
+     */
+    private void setMapa(Vector <String> mapa) throws Exception{
         String linhas [] = new String[mapa.size()]; //split
         linhas = mapa.toArray(new String[mapa.size()]);
         this.mapa = new String[this.linhas][this.colunas];
@@ -123,13 +162,24 @@ public class Mapa implements Cloneable{
         }
         this.procuraEntrada();
     }
-    public void setLinhas(int linhas){
+    /**
+     * adiciona as linhas na classe
+     * @param linhas 
+     */
+    private void setLinhas(int linhas){
         this.linhas=linhas;
     }
-    public void setColunas(int colunas){
+    /**
+     * adiciona as colunas na classe
+     * @param colunas 
+     */
+    private void setColunas(int colunas){
         this.colunas= colunas;
     }
-    
+    /**
+     * produz hashcode da classe
+     * @return int hash
+     */
     public int hashCode(){
         int ret=666;
         ret = ret * 7 + new Integer(this.colunas).hashCode();
@@ -137,7 +187,11 @@ public class Mapa implements Cloneable{
         ret = ret * 7 + new Integer(this.linhas).hashCode();
         return ret;
     }
-    
+    /**
+     * Compara um objeto com o a classe atual
+     * @param obj
+     * @return bollean true para igual e false para falso
+     */
     public boolean equals(Object obj){
         if(obj ==null)
             return false;
@@ -154,7 +208,10 @@ public class Mapa implements Cloneable{
             return false;
         return true;
     }
-    
+    /**
+     * Clona mapa
+     * @return clone do mapa
+     */
     public Mapa clone(){
         Mapa ret =null;
         try{
@@ -163,7 +220,11 @@ public class Mapa implements Cloneable{
         
         return ret;
     }
-    
+    /**
+     * construtor de clone
+     * @param map
+     * @throws Exception objeto nullo
+     */
     public Mapa(Mapa map)throws Exception{
         if(map==null)
             throw new Exception("objeto não pode ser nulo");
@@ -172,15 +233,32 @@ public class Mapa implements Cloneable{
         this.mapa=map.mapa;
         this.entrada = map.entrada;
     }
+    /**
+     * Retorna as linhas lidas no arquivo
+     * @return in linhas
+     */
     public int getLinhas(){
         return this.linhas;
     }
+    /**
+     * retorna as colunas lidas no arquivo
+     * @return int Coluna
+     */
     public int getColunas(){
         return this.colunas;
     }
+    /**
+     * Retorna as cordenadas da entrda
+     * @return Cordenadas da entrada
+     */
     public Cordenadas getEntrada(){
         return this.entrada;
     }
+    /**
+     * Função que procura pelos cantos do programa uma entrada simbolizada pelo E
+     * 
+     * @throws Exception quando não acaha uma entrada
+     */
     private void procuraEntrada() throws Exception{
         int i=0;
         int y=0;

@@ -10,7 +10,12 @@ import java.lang.reflect.Method;
 public class Fila <X> implements Cloneable{
     private Object [] vector;
     private int topo = -1;
-    
+    /**
+     * clona objetos de qual foram usados como classe do vector da fila
+     * @param x
+     * @return clone do objeto X
+     * @throws Exception 
+     */
     private X clonador(X x) throws Exception{//colocar static
         if(x instanceof Cloneable){
               Class <?> classe = x.getClass();
@@ -106,7 +111,11 @@ public class Fila <X> implements Cloneable{
     }*/
      
      
-     //Construtor de Clone
+    /**
+     * contrutor de clone 
+     * @param modelo para ser seguido
+     * @throws Exception 
+     */
     public Fila(Fila<X> modelo)throws Exception{
         if(modelo==null)
             throw new Exception("N�o � aceito objetos null");
@@ -116,7 +125,10 @@ public class Fila <X> implements Cloneable{
         }
         this.topo = (int)new Integer(modelo.topo);        
     }
-    
+    /**
+     * 
+     * @return clone da fila
+     */
     public Fila clone(){
     	Fila<X> ret =null;
         try{
@@ -124,7 +136,10 @@ public class Fila <X> implements Cloneable{
         }catch(Exception e){}//n�o vai acontecer
         return ret;
     }
-     
+     /**
+      * 
+      * @return String coninformações uteis
+      */
     public String toString(){
         String texto = "";
         texto += (this.topo+1)+" elementos(";
@@ -135,7 +150,11 @@ public class Fila <X> implements Cloneable{
         }
         return texto;
     }
-     
+     /**
+      * 
+      * @param obj a ser comparado
+      * @return true se o objeto for equal e false se não for
+      */
      public boolean equals(Object obj){
         if(obj==null)
             return false;
@@ -153,7 +172,10 @@ public class Fila <X> implements Cloneable{
         
         return true;
     }
-     
+     /**
+      * 
+      * @return hash da classe
+      */
     public int hashCode(){
         //int ret = super.hashCode()// quando herdar de alguma classe
         int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe

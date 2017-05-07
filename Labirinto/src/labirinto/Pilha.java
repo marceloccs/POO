@@ -13,7 +13,12 @@ import java.lang.reflect.Method;
 public class Pilha <X>  implements Cloneable{
     private Object [] vector;
     private int topo = -1;
-    
+    /**
+     * clona objetos de qual foram usados como classe do vector da fila
+     * @param x
+     * @return clone do objeto X
+     * @throws Exception 
+     */
     private X clonador(X x) throws Exception{//colocar static
         if(x instanceof Cloneable){
               Class <?> classe = x.getClass();
@@ -77,7 +82,11 @@ public class Pilha <X>  implements Cloneable{
         this.topo--;
         return this.clonador((X)retorno);
      }
-    
+    /**
+      * 
+      * @param obj a ser comparado
+      * @return true se o objeto for equal e false se não for
+      */
     public boolean equals(Object obj){
         if(obj==null)
             return false;
@@ -94,8 +103,11 @@ public class Pilha <X>  implements Cloneable{
         
         return true;
     }
-    
-  //Construtor de Clone
+    /**
+     * contrutor de clone 
+     * @param modelo para ser seguido
+     * @throws Exception 
+     */
     public Pilha(Pilha<X> modelo)throws Exception{
         if(modelo==null)
             throw new Exception("N�o � aceito objetos null");
@@ -106,7 +118,10 @@ public class Pilha <X>  implements Cloneable{
         this.topo = modelo.topo;
         
     }
-    
+    /**
+     * 
+     * @return clone da Pilha
+     */
     public Pilha clone(){
     	Pilha<X> ret =null;
         try{
@@ -114,7 +129,10 @@ public class Pilha <X>  implements Cloneable{
         }catch(Exception e){}//n�o vai acontecer
         return ret;
     }
-    
+    /**
+      * 
+      * @return String coninformações uteis
+      */
     public String toString(){
         String texto = "";
         texto += (this.topo+1)+" elementos(";
@@ -123,7 +141,10 @@ public class Pilha <X>  implements Cloneable{
             texto += "Ultimo valor: " +this.vector[this.topo] + ")";  
         return texto;
     }
-    
+    /**
+      * 
+      * @return hash da classe
+      */
     public int hashCode(){
         //int ret = super.hashCode()// quando herdar de alguma classe
         int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
