@@ -32,18 +32,28 @@ public class ProcuradorCaminho {
             this.mapa.setCaractere(atual, "*");
             posLocal = this.mapa.getMovimentos(atual);
             if(posLocal.getNumeroValores()!=0){
-                atual = posLocal.jogueFora();
-                this.possibilidades.guarde(posLocal.clone());
-                System.out.println(atual.toString());
+                try{
+                    atual = posLocal.jogueFora();
+                    this.possibilidades.guarde(posLocal.clone());
+                    System.out.println(atual.toString());
+                }
+                catch(Exception erro){
+                    throw new Exception ("Documento lido é incompativel");
+                }
             }
             else{
-                do{
-                    this.mapa.setCaractere(atual, " ");
-                    this.possibilidades.jogueFora();
-                    atual = this.mapa.cameBack(atual);
-                    System.out.println(atual.toString());
-                }while(possibilidades.getValor().getNumeroValores()==0);
-                atual= this.possibilidades.getValor().jogueFora();
+                try{
+                    do{
+                        this.mapa.setCaractere(atual, " ");
+                        this.possibilidades.jogueFora();
+                        atual = this.mapa.cameBack(atual);
+                        System.out.println(atual.toString());
+                    }while(possibilidades.getValor().getNumeroValores()==0);
+                    atual= this.possibilidades.getValor().jogueFora();
+                }
+                catch(Exception erro){
+                    throw new Exception ("Documento lido é incompativel");
+                }
             }
         }while(!this.mapa.getPosicao(atual).equals("S"));
         System.out.println("Achou poha na posição na posição: " + atual.toString());
