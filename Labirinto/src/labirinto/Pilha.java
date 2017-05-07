@@ -17,7 +17,7 @@ public class Pilha <X>  implements Cloneable{
     private X clonador(X x) throws Exception{//colocar static
         if(x instanceof Cloneable){
               Class <?> classe = x.getClass();
-              Class <?>[] paramFormal = null;
+              Class <?> [] paramFormal = null;
               Method metodo = classe.getMethod("clone",paramFormal);
               Object[] paramReal = null;
               return (X)metodo.invoke(x, paramReal);//.clone();
@@ -99,8 +99,8 @@ public class Pilha <X>  implements Cloneable{
     public Pilha(Pilha<X> modelo)throws Exception{
         if(modelo==null)
             throw new Exception("N�o � aceito objetos null");
-        
-        for(int i=0;i<=this.topo;i++){
+        this.vector =new Object[modelo.vector.length];
+        for(int i=0;i<=modelo.topo;i++){
             this.vector[i] = this.clonador((X)modelo.vector[i]);//.clone();
         }
         this.topo = modelo.topo;

@@ -55,10 +55,32 @@ public class Mapa implements Cloneable{
         return cor;
     }
     
-    /*public Cordenadas cameBack(Cordenadas came){
+    public Cordenadas cameBack(Cordenadas atual) throws Exception{
+        Cordenadas auxCima = new Cordenadas(atual.getX(),(atual.getY() + 1));
+        Cordenadas auxBaixo = new Cordenadas(atual.getX(),(atual.getY() - 1));
+        Cordenadas auxEsquerda = new Cordenadas((atual.getX() - 1),atual.getY());
+        Cordenadas auxDireita = new Cordenadas((atual.getX() + 1),(atual.getY()));
         
-        return came;
-    }*/
+        /*if(!posicaoatual.equals(" "))
+            throw new Exception("Posição invalida para movimentação");*/
+        try{
+            if (this.mapa[auxCima.getX()][auxCima.getY()].equals("*")){
+                return auxCima.clone();}
+        }catch(Exception e){}
+        try{
+        if (this.mapa[auxBaixo.getX()][auxBaixo.getY()].equals("*")){
+            return auxBaixo.clone();}}catch(Exception e){}
+        
+        try{
+        if (this.mapa[auxEsquerda.getX()][auxEsquerda.getY()].equals("*")){
+            return auxEsquerda.clone();}}catch(Exception e){}
+        
+        try{
+        if (this.mapa[auxDireita.getX()][auxDireita.getY()].equals("*")){
+            return auxDireita.clone();}}catch(Exception e){}
+        
+        return null;
+    }
     
     public Fila<Cordenadas> getMovimentos(Cordenadas cordenada) throws Exception{
         Fila <Cordenadas> ret = new Fila(4);
@@ -72,19 +94,19 @@ public class Mapa implements Cloneable{
             throw new Exception("Posição invalida para movimentação");*/
         try{
             if (this.mapa[auxCima.getX()][auxCima.getY()].equals(" ")||this.mapa[auxCima.getX()][auxCima.getY()].equals("S")){
-                ret.guarde(auxCima);}
+                ret.guarde(auxCima.clone());}
         }catch(Exception e){}
         try{
         if (this.mapa[auxBaixo.getX()][auxBaixo.getY()].equals(" ")||this.mapa[auxBaixo.getX()][auxBaixo.getY()].equals("S")){
-            ret.guarde(auxBaixo);}}catch(Exception e){}
+            ret.guarde(auxBaixo.clone());}}catch(Exception e){}
         
         try{
         if (this.mapa[auxEsquerda.getX()][auxEsquerda.getY()].equals(" ")||this.mapa[auxEsquerda.getX()][auxEsquerda.getY()].equals("S")){
-            ret.guarde(auxEsquerda);}}catch(Exception e){}
+            ret.guarde(auxEsquerda.clone());}}catch(Exception e){}
         
         try{
         if (this.mapa[auxDireita.getX()][auxDireita.getY()].equals(" ")||this.mapa[auxDireita.getX()][auxDireita.getY()].equals("S")){
-            ret.guarde(auxDireita);}}catch(Exception e){}
+            ret.guarde(auxDireita.clone());}}catch(Exception e){}
         
         return ret;
     }

@@ -31,18 +31,22 @@ public class ProcuradorCaminho {
             this.caminho.guarde(atual);
             this.mapa.setCaractere(atual, "*");
             posLocal = this.mapa.getMovimentos(atual);
-            if(posLocal.getNumeroValores()==1){
+            if(posLocal.getNumeroValores()!=0){
                 atual = posLocal.jogueFora();
+                this.possibilidades.guarde(posLocal.clone());
                 System.out.println(atual.toString());
             }
-            else if(posLocal.getNumeroValores()==0){
-                break;
-            }
             else{
-                atual = posLocal.jogueFora();
-                this.possibilidades.guarde(posLocal);
+                do{
+                    this.mapa.setCaractere(atual, " ");
+                    this.possibilidades.jogueFora();
+                    atual = this.mapa.cameBack(atual);
+                    System.out.println(atual.toString());
+                }while(possibilidades.getValor().getNumeroValores()==0);
+                atual= this.possibilidades.getValor().jogueFora();
             }
         }while(!this.mapa.getPosicao(atual).equals("S"));
+        System.out.println("Achou poha na posição na posição: " + atual.toString());
     }
     public String toString(){
         String ret ="Mapa:\n";

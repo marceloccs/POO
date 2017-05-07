@@ -110,12 +110,11 @@ public class Fila <X> implements Cloneable{
     public Fila(Fila<X> modelo)throws Exception{
         if(modelo==null)
             throw new Exception("N�o � aceito objetos null");
-        
-        for(int i=0;i<=this.topo;i++){
+        this.vector =new Object[modelo.vector.length];
+        for(int i=0;i<=modelo.topo;i++){
             this.vector[i] = this.clonador((X)modelo.vector[i]);//.clone();
         }
-        this.topo = modelo.topo;
-        
+        this.topo = (int)new Integer(modelo.topo);        
     }
     
     public Fila clone(){
