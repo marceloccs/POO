@@ -10,17 +10,17 @@ package labirinto;
  * @author Ultron
  */
 public class Programa {
-
+    /////// TODO: Ler teclado e loop;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try{
-            LeitorArquivo reader = new LeitorArquivo("C://Users/Marcelino/Desktop/teste.txt");
+            LeitorArquivo reader = new LeitorArquivo("E://test.txt");
             //System.out.println(reader.getConteudoString());
             Mapa mapa = new Mapa(reader.getConteudo());
             ProcuradorCaminho caminho = new ProcuradorCaminho(mapa);
-            //System.out.println(caminho.toString());
+            System.out.println(caminho.toString());
         }catch(Exception erro){
             System.err.println(erro.getMessage());
         }

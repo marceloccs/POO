@@ -134,12 +134,7 @@ public class Pilha <X>  implements Cloneable{
       * @return String coninformações uteis
       */
     public String toString(){
-        String texto = "";
-        texto += (this.topo+1)+" elementos(";
-        
-        if(this.topo>-1)
-            texto += "Ultimo valor: " +this.vector[this.topo] + ")";  
-        return texto;
+        return this.imprimir();
     }
     /**
       * 
@@ -178,13 +173,13 @@ public class Pilha <X>  implements Cloneable{
         return ret;
     }
     
-   /* public String imprimir(){
+    public String imprimir(){
         String texto = "";
           for(int i=0;i<=this.topo;i++){
               int posicao = i;
               posicao++;
-              texto +=this.vector[i]+" ";
+              texto +=this.vector[i].toString()+" \n";
           }
           return texto;
-    }*/
+    }
 }

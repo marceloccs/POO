@@ -6,7 +6,7 @@
 package labirinto;
 
 import java.util.Vector;
-
+///////TODO documentação, hash, clone, e outros
 /**
  * 
  * @author Ultron
@@ -15,6 +15,7 @@ public class ProcuradorCaminho {
     private Mapa mapa;
     private Pilha<Cordenadas> caminho;
     private Pilha<Fila<Cordenadas>> possibilidades;
+    private Cordenadas fim;
     
     public ProcuradorCaminho(Mapa mapa) throws Exception{
         this.setMapa(mapa);
@@ -26,43 +27,52 @@ public class ProcuradorCaminho {
     private void achaCaminho() throws Exception{
         Cordenadas atual = this.mapa.getEntrada();
         this.mapa.getMovimentos(atual);
-        do{
-            Fila <Cordenadas> posLocal = new Fila(4);
-            this.caminho.guarde(atual);
-            this.mapa.setCaractere(atual, "*");
-            posLocal = this.mapa.getMovimentos(atual);
-            if(posLocal.getNumeroValores()!=0){
-                try{
-                    atual = posLocal.jogueFora();
-                    this.possibilidades.guarde(posLocal.clone());
-                    System.out.println(atual.toString());
+        try{
+            do{
+                Fila <Cordenadas> posLocal = new Fila(4);
+                this.caminho.guarde(atual);
+                this.mapa.setCaractere(atual, "*");
+                posLocal = this.mapa.getMovimentos(atual);
+                if(posLocal.getNumeroValores()!=0){
+                    try{
+                        atual = posLocal.jogueFora();
+                        this.possibilidades.guarde(posLocal.clone());
+                        //System.out.println(atual.toString());
+                    }
+                    catch(Exception erro){
+                        throw new Exception ("Documento lido é incompativel, verifique se a quantidade de linhas e colunas estão certas e se o labirinto tem fim");
+                    }
                 }
-                catch(Exception erro){
-                    throw new Exception ("Documento lido é incompativel");
+                else{
+                    try{
+                        do{
+                            this.mapa.setCaractere(atual, " ");
+                            this.caminho.jogueFora();
+                            this.possibilidades.jogueFora();
+                            atual = this.mapa.cameBack(atual);
+                            //System.out.println(atual.toString());
+                        }while(possibilidades.getValor().getNumeroValores()==0);
+                        atual= this.possibilidades.getValor().jogueFora();
+                    }
+                    catch(Exception erro){
+                        throw new Exception ("Documento lido é incompativel, verifique se a quantidade de linhas e colunas estão certas e se o labirinto tem fim");
+                    }
                 }
-            }
-            else{
-                try{
-                    do{
-                        this.mapa.setCaractere(atual, " ");
-                        this.possibilidades.jogueFora();
-                        atual = this.mapa.cameBack(atual);
-                        System.out.println(atual.toString());
-                    }while(possibilidades.getValor().getNumeroValores()==0);
-                    atual= this.possibilidades.getValor().jogueFora();
-                }
-                catch(Exception erro){
-                    throw new Exception ("Documento lido é incompativel");
-                }
-            }
-        }while(!this.mapa.getPosicao(atual).equals("S"));
-        System.out.println("Achou poha na posição na posição: " + atual.toString());
+            }while(!this.mapa.getPosicao(atual).equals("S"));
+
+            if(!(this.mapa.getPosicao(atual).equals("S")))
+                throw new Exception ("Não achou fim");
+            this.fim = atual;
+            //System.out.println(this.caminho.imprimir());
+        
+        }catch(Exception e){
+            throw new Exception ("Documento lido é incompativel, verifique se a quantidade de linhas e colunas estão certas e se o labirinto tem fim");
+        }
     }
     public String toString(){
-        String ret ="Mapa:\n";
-        ret+=this.mapa.toString();
-        ret+="\nCaminho: "+this.caminho.toString();
-        ret+="\nPossibilidades: "+this.possibilidades.toString();
+        String ret ="";
+        ret=ret+"\nCaminho:\n"+this.caminho.toString();
+        ret=ret+"\nFim do labirinto: "+this.fim.toString();
         return ret;
     }
     private void setMapa(Mapa mapa){
