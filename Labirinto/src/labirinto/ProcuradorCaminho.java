@@ -106,4 +106,13 @@ public class ProcuradorCaminho {
     	return true;
     }
     
+    public int hashCode() {
+    	int ret = 666;
+    	ret = 7 * ret + this.mapa.hashCode();
+    	ret = 7 * ret + this.caminho.hashCode();
+    	ret = 7 * ret + this.possibilidades.hashCode();
+    	ret = 7 * ret + this.fim.hashCode();
+    	
+    	return ret;
+    }
 }
