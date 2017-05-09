@@ -11,25 +11,25 @@ import java.util.Vector;
  * 
  * @author Ultron
  */
-public class ProcuradorCaminho {
+public class ProcuradorCaminho implements Cloneable{
     private Mapa mapa;
-    private Pilha<Cordenadas> caminho;
-    private Pilha<Fila<Cordenadas>> possibilidades;
-    private Cordenadas fim;
+    private Pilha<Coordenadas> caminho;
+    private Pilha<Fila<Coordenadas>> possibilidades;
+    private Coordenadas fim;
     
     public ProcuradorCaminho(Mapa mapa) throws Exception{
         this.setMapa(mapa);
         int mult = this.mapa.getColunas() * this.mapa.getLinhas();
-        this.caminho = new Pilha<Cordenadas>(mult);
-        this.possibilidades = new Pilha<Fila<Cordenadas>>(mult);
+        this.caminho = new Pilha<Coordenadas>(mult);
+        this.possibilidades = new Pilha<Fila<Coordenadas>>(mult);
         this.achaCaminho();
     }
     private void achaCaminho() throws Exception{
-        Cordenadas atual = this.mapa.getEntrada();
+        Coordenadas atual = this.mapa.getEntrada();
         this.mapa.getMovimentos(atual);
         try{
             do{
-                Fila <Cordenadas> posLocal = new Fila(4);
+                Fila <Coordenadas> posLocal = new Fila(4);
                 this.caminho.guarde(atual);
                 this.mapa.setCaractere(atual, "*");
                 posLocal = this.mapa.getMovimentos(atual);
@@ -114,5 +114,25 @@ public class ProcuradorCaminho {
     	ret = 7 * ret + this.fim.hashCode();
     	
     	return ret;
+    }
+    
+    public ProcuradorCaminho clone() {
+    	ProcuradorCaminho ret = null;
+    	try {
+    		ret = new ProcuradorCaminho(this);
+    	}
+    	catch(Exception e) {}
+    	
+    	return ret;
+    }
+    
+    public ProcuradorCaminho(ProcuradorCaminho obj) throws Exception {
+    	if(obj == null)
+    		throw new Exception("Objeto não pode ser nulo!");
+    	
+    	this.mapa = obj.mapa;
+    	this.caminho = obj.caminho;
+    	this.possibilidades = obj.possibilidades;
+    	this.fim = obj.fim;
     }
 }

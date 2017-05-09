@@ -16,7 +16,7 @@ public class Mapa implements Cloneable{
     private String mapa[][];
     private int linhas;
     private int colunas;
-    private Cordenadas entrada;
+    private Coordenadas entrada;
     
     /**
      * constroi a classe de mapa
@@ -43,7 +43,7 @@ public class Mapa implements Cloneable{
      * @param cordenada cordenada que deseja ver o caracter
      * @return caracter que foi encontrado na cordenada
      */
-    public String getPosicao(Cordenadas cordenada){
+    public String getPosicao(Coordenadas cordenada){
         return this.mapa[cordenada.getX()][cordenada.getY()];
     }
     /**
@@ -72,7 +72,7 @@ public class Mapa implements Cloneable{
      * @return cordenada da onde foi mudado
      * @throws CloneNotSupportedException 
      */
-    public Cordenadas setCaractere(Cordenadas cor, String caracter) throws CloneNotSupportedException{
+    public Coordenadas setCaractere(Coordenadas cor, String caracter) throws CloneNotSupportedException{
         this.mapa[cor.getX()][cor.getY()] = caracter;
         return cor;
     }
@@ -83,11 +83,11 @@ public class Mapa implements Cloneable{
      * @return cordenadas que foir retornada
      * @throws Exception 
      */
-    public Cordenadas cameBack(Cordenadas atual) throws Exception{
-        Cordenadas auxCima = new Cordenadas(atual.getX(),(atual.getY() + 1));
-        Cordenadas auxBaixo = new Cordenadas(atual.getX(),(atual.getY() - 1));
-        Cordenadas auxEsquerda = new Cordenadas((atual.getX() - 1),atual.getY());
-        Cordenadas auxDireita = new Cordenadas((atual.getX() + 1),(atual.getY()));
+    public Coordenadas cameBack(Coordenadas atual) throws Exception{
+        Coordenadas auxCima = new Coordenadas(atual.getX(),(atual.getY() + 1));
+        Coordenadas auxBaixo = new Coordenadas(atual.getX(),(atual.getY() - 1));
+        Coordenadas auxEsquerda = new Coordenadas((atual.getX() - 1),atual.getY());
+        Coordenadas auxDireita = new Coordenadas((atual.getX() + 1),(atual.getY()));
         
         /*if(!posicaoatual.equals(" "))
             throw new Exception("Posição invalida para movimentação");*/
@@ -115,13 +115,13 @@ public class Mapa implements Cloneable{
      * @return Fila de coordenadas possiveis
      * @throws Exception 
      */
-    public Fila<Cordenadas> getMovimentos(Cordenadas cordenada) throws Exception{
-        Fila <Cordenadas> ret = new Fila(4);
+    public Fila<Coordenadas> getMovimentos(Coordenadas cordenada) throws Exception{
+        Fila <Coordenadas> ret = new Fila(4);
         //String posicaoatual = this.mapa[cordenada.getX()][cordenada.getY()];
-        Cordenadas auxCima = new Cordenadas(cordenada.getX(),(cordenada.getY() + 1));
-        Cordenadas auxBaixo = new Cordenadas(cordenada.getX(),(cordenada.getY() - 1));
-        Cordenadas auxEsquerda = new Cordenadas((cordenada.getX() - 1),cordenada.getY());
-        Cordenadas auxDireita = new Cordenadas((cordenada.getX() + 1),(cordenada.getY()));
+        Coordenadas auxCima = new Coordenadas(cordenada.getX(),(cordenada.getY() + 1));
+        Coordenadas auxBaixo = new Coordenadas(cordenada.getX(),(cordenada.getY() - 1));
+        Coordenadas auxEsquerda = new Coordenadas((cordenada.getX() - 1),cordenada.getY());
+        Coordenadas auxDireita = new Coordenadas((cordenada.getX() + 1),(cordenada.getY()));
         
         /*if(!posicaoatual.equals(" "))
             throw new Exception("Posição invalida para movimentação");*/
@@ -251,7 +251,7 @@ public class Mapa implements Cloneable{
      * Retorna as cordenadas da entrda
      * @return Cordenadas da entrada
      */
-    public Cordenadas getEntrada(){
+    public Coordenadas getEntrada(){
         return this.entrada;
     }
     /**
@@ -268,17 +268,17 @@ public class Mapa implements Cloneable{
             if(i==limite||i==0){
                 for(y=0; y >this.linhas;y++){
                     if(this.mapa[i][y].equals("E")){
-                        this.entrada = new Cordenadas(i,y);
+                        this.entrada = new Coordenadas(i,y);
                         break;
                     }
                 }
             }else{
                 if(this.mapa[i][0].equals("E")){
-                    this.entrada = new Cordenadas(i,y);
+                    this.entrada = new Coordenadas(i,y);
                     break;
                 }
                 if(this.mapa[i][limite].equals("E")){
-                    this.entrada = new Cordenadas(i,y);
+                    this.entrada = new Coordenadas(i,y);
                     break;
                 }
             }

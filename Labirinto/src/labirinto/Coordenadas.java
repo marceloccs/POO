@@ -9,11 +9,11 @@ package labirinto;
  *
  * @author Ultron
  */
-public class Cordenadas implements Cloneable{
+public class Coordenadas implements Cloneable{
     private int x;
     private int y;
     
-    public Cordenadas(int x, int y) throws Exception{
+    public Coordenadas(int x, int y) throws Exception{
         this.setY(y);
         this.setX(x);
     }
@@ -45,13 +45,13 @@ public class Cordenadas implements Cloneable{
     }
     
     public boolean equals(Object obj){
-        if(obj ==null)
+        if(obj == null)
             return false;
         if(obj==this)
             return true;
         if(obj.getClass() != this.getClass())
             return false;
-        Cordenadas aux = (Cordenadas)obj;
+        Coordenadas aux = (Coordenadas)obj;
         if(aux.x!=this.x)
             return false;
         if(aux.y!=this.y)
@@ -60,16 +60,16 @@ public class Cordenadas implements Cloneable{
         return true;
     }
     
-    public Cordenadas clone(){
-        Cordenadas ret =null;
+    public Coordenadas clone(){
+        Coordenadas ret = null;
         try{
-            ret = new Cordenadas(this);
+            ret = new Coordenadas(this);
         }catch(Exception e){}
         
         return ret;
     }
     
-    public Cordenadas(Cordenadas cor)throws Exception{
+    public Coordenadas(Coordenadas cor)throws Exception{
         if(cor==null)
             throw new Exception("objeto não pode ser nulo");
         this.x=cor.x;
