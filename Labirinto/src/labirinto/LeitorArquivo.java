@@ -66,8 +66,7 @@ public class LeitorArquivo implements Cloneable{
                         //while(br.redy());
 
 		} catch (IOException e) {
-
-                    throw new Exception("não foi possivel ler o arquivo!");
+                    throw new Exception("não foi possivel ler o arquivo, verifique o caminho e nome do arquivo!");
 
 		}
         this.conteudo = ret;

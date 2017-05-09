@@ -5,6 +5,9 @@
  */
 package labirinto;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 /**
  *
  * @author Ultron
@@ -15,15 +18,25 @@ public class Programa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try{
-            LeitorArquivo reader = new LeitorArquivo("E://test.txt");
-            //System.out.println(reader.getConteudoString());
-            Mapa mapa = new Mapa(reader.getConteudo());
-            ProcuradorCaminho caminho = new ProcuradorCaminho(mapa);
-            System.out.println(caminho.toString());
-        }catch(Exception erro){
-            System.err.println(erro.getMessage());
-        }
+        String resposta ="";
+        BufferedReader teclado = new BufferedReader( new InputStreamReader(System.in));
+        do{
+            try{
+                System.out.println(""
+                     + "O caminho com o nome de onde o seu mapa esta localizado dentro do computador:"
+                     + "\n*Lembre de por a extenção .txt"
+                     + "\n**Caso deseje sair do programa digite sair");
+                resposta = teclado.readLine();
+                if(!resposta.equals("sair")){
+                    LeitorArquivo reader = new LeitorArquivo(resposta);
+                    Mapa mapa = new Mapa(reader.getConteudo());
+                    ProcuradorCaminho caminho = new ProcuradorCaminho(mapa);
+                    System.out.println(caminho.toString());
+                }
+            }catch(Exception erro){
+                System.err.println(erro.getMessage());
+            }
+        }while(!resposta.equals("sair"));
     }
     
 }
