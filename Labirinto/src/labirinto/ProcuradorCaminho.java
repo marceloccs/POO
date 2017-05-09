@@ -79,4 +79,31 @@ public class ProcuradorCaminho {
         this.mapa = mapa.clone();
     }
     
+    public boolean equals(Object obj) {
+    	if(obj == null)
+    		return false;
+    	
+    	if(obj == this)
+    		return true;
+    	
+    	if(obj.getClass() != this.getClass())
+    		return false;
+    	
+    	ProcuradorCaminho aux = (ProcuradorCaminho)obj;
+    	
+    	if(aux.mapa != this.mapa)
+    		return false;
+    	
+    	if(aux.caminho != this.caminho)
+    		return false;
+    	
+    	if(aux.possibilidades != this.possibilidades)
+    		return false;
+    	
+    	if(aux.fim != this.fim)
+    		return false;
+    	
+    	return true;
+    }
+    
 }

@@ -48,7 +48,7 @@ public class Cordenadas implements Cloneable{
         if(obj ==null)
             return false;
         if(obj==this)
-            return false;
+            return true;
         if(obj.getClass() != this.getClass())
             return false;
         Cordenadas aux = (Cordenadas)obj;
