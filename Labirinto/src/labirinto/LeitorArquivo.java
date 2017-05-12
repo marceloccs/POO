@@ -18,7 +18,7 @@ import java.util.Vector;
  */
 public class LeitorArquivo implements Cloneable{
     private String fileName;
-    private Vector<String> conteudo;
+    private Vector <String> conteudo;
     
     public LeitorArquivo(String fileName) throws Exception{
         this.setFileName(fileName);
@@ -85,7 +85,7 @@ public class LeitorArquivo implements Cloneable{
      * 
      * @return String[] com os valores de cada linha
      */
-    public String[] getConteudoVectorString(){
+    /*public String[] getConteudoVectorString(){
         String[] ret = new String [this.conteudo.size()];
         
         for (int i =0;i<this.conteudo.size();i++){
@@ -93,7 +93,7 @@ public class LeitorArquivo implements Cloneable{
         }
         
         return ret;
-    }
+    }*/
     /**
      * retorna uma string corrida intdentica com o arquivo lido
      * 
@@ -108,20 +108,30 @@ public class LeitorArquivo implements Cloneable{
         
         return ret;
     }
-    
+    /**
+     * 
+     * @return String com informações uteis
+     */
     public String toString(){
         return "Local do arquivo: "+this.fileName+"\n"
         + "Numero de linhas: "+this.conteudo.size()+"\n"
         + "Arquivo Lido: "+this.getConteudoString();
     }
-    
+    /**
+     * 
+     * @return hash da classe
+     */
     public int hashCode(){
         int ret=666;
         ret = ret * 7 + this.conteudo.hashCode();
         ret = ret * 7 + this.fileName.hashCode();
         return ret;
     }
-    
+    /**
+     * Co para o obj com a classe
+     * @param obj A ser comparado
+     * @return Bollean True pra igual e False para diferentes
+     */
     public boolean equals(Object obj){
         if(obj ==null)
             return false;
@@ -137,7 +147,10 @@ public class LeitorArquivo implements Cloneable{
         
         return true;
     }
-    
+    /**
+     * Clona a classe
+     * @return Clone da classe
+     */
     public LeitorArquivo clone(){
         LeitorArquivo ret =null;
         try{
@@ -146,7 +159,11 @@ public class LeitorArquivo implements Cloneable{
         
         return ret;
     }
-    
+    /**
+     * Contrutor de clone
+     * @param lei classe a ser clonada
+     * @throws Exception 
+     */
     public LeitorArquivo(LeitorArquivo lei)throws Exception{
         if(lei==null)
             throw new Exception("objeto não pode ser nulo");

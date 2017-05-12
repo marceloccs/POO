@@ -6,7 +6,6 @@
 package labirinto;
 
 import java.util.Vector;
-///////TODO documentação, hash, clone, e outros
 /**
  * 
  * @author Ultron
@@ -16,7 +15,11 @@ public class ProcuradorCaminho implements Cloneable{
     private Pilha<Coordenadas> caminho;
     private Pilha<Fila<Coordenadas>> possibilidades;
     private Coordenadas fim;
-    
+    /**
+     * Classe como objetico de achar o caminho de um mapa passado
+     * @param mapa Mapa com o labirinto que deve ser procurado
+     * @throws Exception não achou caminho pois o labirinto ta mal formulado
+     */
     public ProcuradorCaminho(Mapa mapa) throws Exception{
         this.setMapa(mapa);
         int mult = this.mapa.getColunas() * this.mapa.getLinhas();
@@ -24,6 +27,10 @@ public class ProcuradorCaminho implements Cloneable{
         this.possibilidades = new Pilha<Fila<Coordenadas>>(mult);
         this.achaCaminho();
     }
+    /**
+     * Função que procura caminho e armazena no caminho e quando achado coloca no fim
+     * @throws Exception Não acha caminho do labirinto
+     */
     private void achaCaminho() throws Exception{
         Coordenadas atual = this.mapa.getEntrada();
         this.mapa.getMovimentos(atual);
@@ -50,7 +57,7 @@ public class ProcuradorCaminho implements Cloneable{
                             this.caminho.jogueFora();
                             this.possibilidades.jogueFora();
                             atual = this.mapa.cameBack(atual);
-                            //System.out.println(atual.toString());
+                            System.out.println(this.mapa.toString());
                         }while(possibilidades.getValor().getNumeroValores()==0);
                         atual= this.possibilidades.getValor().jogueFora();
                     }
@@ -68,17 +75,28 @@ public class ProcuradorCaminho implements Cloneable{
         }catch(Exception e){
             throw new Exception ("Documento lido é incompativel, verifique se a quantidade de linhas e colunas estão certas e se o labirinto tem fim");
         }
-    }
+    }/**
+     * retorna uma string com as informações de comco achou o fim
+     * @return String com o caminho que foi feito para achar o fim e a posição do fim
+     */
     public String toString(){
         String ret ="";
         ret=ret+"\nCaminho:\n"+this.caminho.toString();
         ret=ret+"\nFim do labirinto: "+this.fim.toString();
         return ret;
     }
+    /**
+     * função que seta na classe o mapa
+     * @param mapa mapa para achar o caminho
+     */
     private void setMapa(Mapa mapa){
         this.mapa = mapa.clone();
     }
-    
+    /**
+     * Compara o objeto passda com a classe
+     * @param obj objeto para ser comparado 
+     * @return true para iguais e false para diferentes
+     */
     public boolean equals(Object obj) {
     	if(obj == null)
     		return false;
@@ -105,7 +123,10 @@ public class ProcuradorCaminho implements Cloneable{
     	
     	return true;
     }
-    
+    /**
+     * 
+     * @return hash da classe
+     */
     public int hashCode() {
     	int ret = 666;
     	ret = 7 * ret + this.mapa.hashCode();
@@ -115,7 +136,10 @@ public class ProcuradorCaminho implements Cloneable{
     	
     	return ret;
     }
-    
+    /**
+     * clona a classe
+     * @return classe clonada
+     */
     public ProcuradorCaminho clone() {
     	ProcuradorCaminho ret = null;
     	try {
@@ -125,10 +149,14 @@ public class ProcuradorCaminho implements Cloneable{
     	
     	return ret;
     }
-    
+    /**
+     * construtor de clone
+     * @param obj ProcuradorCaminho a ser clonado
+     * @throws Exception 
+     */
     public ProcuradorCaminho(ProcuradorCaminho obj) throws Exception {
     	if(obj == null)
-    		throw new Exception("Objeto n�o pode ser nulo!");
+    		throw new Exception("Objeto n�o pode ser nulo!");
     	
     	this.mapa = obj.mapa;
     	this.caminho = obj.caminho;

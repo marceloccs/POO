@@ -21,10 +21,9 @@ public class Mapa implements Cloneable{
     /**
      * constroi a classe de mapa
      * @param mapaNaoTratado um Vector do arquivo lido com as primeiras linhas com coluna e linhas e as proximas com o mapa
-     * @throws CloneNotSupportedException
      * @throws Exception 
      */
-    public Mapa(Vector <String> mapaNaoTratado) throws CloneNotSupportedException, Exception{
+    public Mapa(Vector <String> mapaNaoTratado) throws Exception{
         try {
             int linhaInt = Integer.parseInt(mapaNaoTratado.firstElement());
             mapaNaoTratado.remove(mapaNaoTratado.firstElement());
@@ -59,9 +58,9 @@ public class Mapa implements Cloneable{
             ret += "\n";
         }
         ret += "\n";
-        ret +="Entrada: " +this.entrada.toString();
-        ret +="\nLinhas: " +this.linhas;
-        ret +="\nColunas: " +this.colunas;
+        //ret +="Entrada: " +this.entrada.toString();
+        //ret +="\nLinhas: " +this.linhas;
+        //ret +="\nColunas: " +this.colunas;
         return ret;
     }
     /**
@@ -266,7 +265,7 @@ public class Mapa implements Cloneable{
         limite--;
         for(i=0;i<this.colunas;i++){
             if(i==limite||i==0){
-                for(y=0; y >this.linhas;y++){
+                for(y=0; y<this.linhas;y++){
                     if(this.mapa[i][y].equals("E")){
                         this.entrada = new Coordenadas(i,y);
                         break;
