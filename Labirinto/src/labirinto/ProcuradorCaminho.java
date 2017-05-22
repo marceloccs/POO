@@ -15,6 +15,7 @@ public class ProcuradorCaminho implements Cloneable{
     private Pilha<Coordenadas> caminho;
     private Pilha<Fila<Coordenadas>> possibilidades;
     private Coordenadas fim;
+    private Coordenadas atual;
     /**
      * Classe como objetico de achar o caminho de um mapa passado
      * @param mapa Mapa com o labirinto que deve ser procurado
@@ -32,17 +33,17 @@ public class ProcuradorCaminho implements Cloneable{
      * @throws Exception Não acha caminho do labirinto
      */
     private void achaCaminho() throws Exception{
-        Coordenadas atual = this.mapa.getEntrada();
-        this.mapa.getMovimentos(atual);
+        this.atual = this.mapa.getEntrada();
+        this.mapa.getMovimentos(this.atual);
         try{
             do{
                 Fila <Coordenadas> posLocal = new Fila(4);
-                this.caminho.guarde(atual);
-                this.mapa.setCaractere(atual, "*");
-                posLocal = this.mapa.getMovimentos(atual);
+                this.caminho.guarde(this.atual);
+                this.mapa.setCaractere(this.atual, "*");
+                posLocal = this.mapa.getMovimentos(this.atual);
                 if(posLocal.getNumeroValores()!=0){
                     try{
-                        atual = posLocal.jogueFora();
+                        this.atual = posLocal.jogueFora().clone();
                         this.possibilidades.guarde(posLocal.clone());
                         //System.out.println(atual.toString());
                     }
@@ -52,14 +53,19 @@ public class ProcuradorCaminho implements Cloneable{
                 }
                 else{
                     try{
-                        do{
-                            this.mapa.setCaractere(atual, " ");
-                            this.caminho.jogueFora();
-                            this.possibilidades.jogueFora();
-                            atual = this.mapa.cameBack(atual);
-                            System.out.println(this.mapa.toString());
-                        }while(possibilidades.getValor().getNumeroValores()==0);
-                        atual= this.possibilidades.getValor().jogueFora();
+                        if (this.possibilidades.getValor().getNumeroValores()==0){
+                            do{
+                                System.out.println(this.mapa.setCaractere(this.atual, " "));
+                                this.caminho.jogueFora();
+                                this.possibilidades.jogueFora();
+                                System.out.println(this.atual = this.mapa.cameBack(this.atual).clone());
+                                System.out.println(this.atual);
+                                //System.out.println(this.mapa.cameBack(this.atual));
+                                //System.out.println(this.mapa.toString());
+                            }while(possibilidades.getValor().getNumeroValores()==0);
+                        }
+                        this.mapa.setCaractere(this.atual, " ");
+                        this.atual= this.possibilidades.getValor().jogueFora().clone();
                     }
                     catch(Exception erro){
                         throw new Exception ("Documento lido é incompativel, verifique se a quantidade de linhas e colunas estão certas e se o labirinto tem fim");
@@ -69,7 +75,7 @@ public class ProcuradorCaminho implements Cloneable{
 
             if(!(this.mapa.getPosicao(atual).equals("S")))
                 throw new Exception ("Não achou fim");
-            this.fim = atual;
+            this.fim = this.atual.clone();
             //System.out.println(this.caminho.imprimir());
         
         }catch(Exception e){
