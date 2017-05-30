@@ -5,17 +5,24 @@
  */
 package bingo;
 
+import business.User;
+
 /**
  *
  * @author Ultron
  */
 public class Bingo {
 
+	static HomePanel home = new HomePanel();
+    static CadastrarPanel cadastro = new CadastrarPanel();
+    static User sesao;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+    	Bingo.home.setVisible(true);
+        
     }
     
 }
