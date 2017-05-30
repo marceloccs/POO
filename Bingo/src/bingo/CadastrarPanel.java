@@ -4,12 +4,24 @@
  * and open the template in the editor.
  */
 package bingo;
+import javax.swing.JButton;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.GroupLayout;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 /**
  *
  * @author Ultron
  */
 public class CadastrarPanel extends javax.swing.JFrame {
+	private JTextField textField;
+	private JTextField textField_1;
+	private JPasswordField passwordField;
 
     /**
      * Creates new form CadastrarPanel
@@ -28,17 +40,69 @@ public class CadastrarPanel extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
+        JButton btnCompletar = new JButton("Completar");
+        
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        
+        JLabel lblEmail = new JLabel("Email");
+        
+        JLabel lblNome = new JLabel("Nome");
+        
+        JLabel lblSenha = new JLabel("Senha");
+        
+        textField = new JTextField();
+        textField.setColumns(10);
+        
+        textField_1 = new JTextField();
+        textField_1.setColumns(10);
+        
+        passwordField = new JPasswordField();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(72)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblEmail)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(btnCompletar)
+        					.addGap(57)
+        					.addComponent(btnCancelar))
+        				.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(passwordField)
+        				.addComponent(textField_1)
+        				.addComponent(textField))
+        			.addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        			.addGap(28)
+        			.addComponent(lblEmail)
+        			.addGap(3)
+        			.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(lblNome)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(12)
+        			.addComponent(lblSenha)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnCancelar)
+        				.addComponent(btnCompletar))
+        			.addGap(85))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -77,7 +141,4 @@ public class CadastrarPanel extends javax.swing.JFrame {
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

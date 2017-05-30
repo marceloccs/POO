@@ -1,0 +1,8 @@
+package bd.dbos;
+
+public class TabelaJogos {
+	private Vector <Jogo> jogos;
+	
+	public TabelaJogos
+
+}

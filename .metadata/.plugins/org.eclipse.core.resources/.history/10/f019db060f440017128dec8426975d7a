@@ -1,0 +1,46 @@
+package protocolo;
+
+import bd.BD;
+import bd.dbos.User;
+
+public enum AcaoPedido {
+	NewUser(1),
+	IniciarJogo(2),
+	Ath(3),
+	Ganhou(4),
+	PegarTabelaJogos(5);
+	
+	public int numero;
+	
+	AcaoPedido(int sta){
+		this.numero = sta;
+	}
+	
+	AcaoPedido(AcaoPedido ap){
+		this.numero = ap.getnumero();
+	}
+	
+	public int getnumero(){
+		return this.numero;
+	}
+	public Object acionarAcao(Object obj){
+		Object ret = null;
+		try{
+			switch(this.numero){
+				case 1:
+					User u = new User(obj);
+					BD.USERS.incluir(u);
+					break;
+				case 2:
+					break;
+				case 3:
+			}
+			
+		}catch(Exception e){
+			AcaoResposta acao = new AcaoResposta(0);
+			ret = new ProtocoloResposta(null,acao, e.getMessage(), false);
+		}
+		return ret;
+	}
+	
+}

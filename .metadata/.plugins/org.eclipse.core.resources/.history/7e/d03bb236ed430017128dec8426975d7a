@@ -1,0 +1,9 @@
+package protocolo;
+
+public interface UserPadrao {
+	public UserPadrao(Object obj);
+	public int getID();
+	public String getNome();
+	public String getEmail();
+	public String getPassword();
+}

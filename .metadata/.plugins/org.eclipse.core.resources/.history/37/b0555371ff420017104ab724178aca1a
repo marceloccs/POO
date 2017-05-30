@@ -1,0 +1,40 @@
+package server;
+
+import java.io.InputStream;
+
+public class TrataClientes implements Runnable {
+
+	 
+
+	   private InputStream cliente;
+
+	   private Servidor servidor;
+
+	 
+
+	   public TrataClientes(InputStream cliente, Servidor servidor) {
+
+	     this.cliente = cliente;
+
+	     this.servidor = servidor;
+
+	   }
+
+	 
+
+	   public void run() {
+
+	     // quando chegar uma msg, distribui pra todos
+
+	     Scanner s = new Scanner(this.cliente);
+
+	     while (s.hasNextLine()) {
+
+	       servidor.distribuiMensagem(s.nextLine());
+
+	     }
+
+	     s.close();
+
+	   }
+}

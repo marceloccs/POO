@@ -1,0 +1,13 @@
+package protocolo;
+
+public class ProtocoloPedido {
+	private Object obj;
+	private Status status;
+	private String mensagem;
+	
+	public ProtocoloPedido(Object obj, Status status, String mensagem){
+		this.obj = obj;
+		this.status = status;
+		this.mensagem = mensagem;
+	}
+}

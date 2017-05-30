@@ -1,0 +1,20 @@
+package programa;
+
+import bd.*;
+import bd.dbos.*;
+
+public class Programa
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            //User = new Livro (1,"L'Etranger",55.55F);
+            System.out.println(BD.USERS.getUser(2).toString());
+        }
+        catch (Exception erro)
+        {
+            System.err.println (erro);
+        }
+    } 
+}

@@ -1,0 +1,40 @@
+package bd.dbos;
+
+import java.sql.Date;
+
+public class Users implements Cloneable {
+	private int id;
+	private String nome;
+	private String email;
+	
+	public void setID(int id) throws Exception{
+		if (id<0)
+			throw new Exception ("ID do Jogo invalido");
+		this.id = id;
+	}
+	public void setNome(String nome) throws Exception{
+		if(nome==null)
+			throw new Exception ("dataTermino do jogo invalido");
+		this.nome = nome;
+	}
+	public void setEmail(String email) throws Exception{
+		if(email==null)
+			throw new Exception ("dataTermino do jogo invalido");
+		this.email = email;
+	}
+	public int getID(){
+		return this.id;
+	}
+	public String getNome(){
+		return this.nome;
+	}
+	public String getEmail(){
+		return this.email;
+	}
+	public Users(int id, String nome, String email) throws Exception{
+		this.setID(id);
+		this.setEmail(email);
+		this.setNome(nome);
+	}
+
+}

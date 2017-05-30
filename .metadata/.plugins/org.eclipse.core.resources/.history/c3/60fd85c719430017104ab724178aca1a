@@ -1,0 +1,7 @@
+package protocolo;
+
+public class ProtocoloTuchanka {
+	private Object obj;
+	private Status status;
+	private String mensagem;
+}

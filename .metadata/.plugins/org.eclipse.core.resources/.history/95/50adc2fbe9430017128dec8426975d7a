@@ -1,0 +1,15 @@
+package protocolo;
+
+public enum AcaoPedido {
+	NewUser(1),
+	IniciarJogo(2),
+	Ath(3),
+	Ganhou(4),
+	PegarTabela(5);
+	
+	public int status;
+	AcaoPedido(int sta){
+		this.status = sta;
+	}
+	
+}

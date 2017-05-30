@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package bingo;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -29,6 +31,10 @@ public class HomePanel extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
         jButton3 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -42,11 +48,11 @@ public class HomePanel extends javax.swing.JFrame {
         setTitle("HOME");
         setResizable(false);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Entrar");
 
-        jButton2.setText("jButton1");
+        jButton2.setText("Sair");
 
-        jButton3.setText("jButton1");
+        jButton3.setText("Cadastrar-se");
 
         jTextField1.setText("Email");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {

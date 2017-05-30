@@ -1,0 +1,18 @@
+package protocolo;
+
+public enum Status {
+	NewUser(1),
+	FinalizaJogo(2),
+	Ganhador(3),
+	Abortar(4),
+	IniciarJogo(5),
+	Ath(6),
+	JogoAcabou(7),
+	PegarTabela(8);
+	
+	public int status;
+	Status(int sta){
+		this.status = sta;
+	}
+	
+}

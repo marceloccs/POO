@@ -1,0 +1,30 @@
+package bd.dbos;
+
+import java.sql.Date;
+
+public class Jogos implements Cloneable {
+	private int id;
+	private Date dataTermino;
+	
+	public void setID(int id) throws Exception{
+		if (id<0)
+			throw new Exception ("ID do Jogo invalido");
+		this.id = id;
+	}
+	public void setDataTermino(Date dataTermino) throws Exception{
+		if(dataTermino==null)
+			throw new Exception ("dataTermino do jogo invalido");
+		this.dataTermino = dataTermino;
+	}
+	public int getID(){
+		return this.id;
+	}
+	public Date getDataTermino(){
+		return this.dataTermino;
+	}
+	public Jogos(int id, Date dataTermino) throws Exception{
+		this.setID(id);
+		this.setDataTermino(dataTermino);
+	}
+
+}

@@ -1,0 +1,5 @@
+package bd.daos;
+
+public class Users implements Cloneable {
+
+}
