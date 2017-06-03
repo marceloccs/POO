@@ -1,0 +1,44 @@
+package business;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import Protocolo.AcaoPedido;
+import Protocolo.ProtocoloPedido;
+import cliente.ClienteNormal;
+import cliente.Constants;
+
+public class ListenerCreateUser implements ActionListener {
+	protected JTextField email;
+	protected JTextField nome;
+	protected JPasswordField passwordField;
+	
+	public ListenerCreateUser(JTextField email, JTextField nome, JPasswordField passwordField){
+		this.email=email;
+		this.nome=nome;
+		this.passwordField=passwordField;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		try {
+			User cadastrado;
+			User user = new User(
+					this.email.getText(),
+					this.nome.getText(),
+					this.passwordField.getText()
+			);
+			ProtocoloPedido protocolo = new ProtocoloPedido(user, AcaoPedido.NewUser, Constants.ipProprio);
+			ClienteNormal cli = new ClienteNormal(protocolo);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}

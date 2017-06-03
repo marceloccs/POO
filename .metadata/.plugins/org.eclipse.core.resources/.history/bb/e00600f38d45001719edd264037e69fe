@@ -1,0 +1,24 @@
+package Protocolo;
+
+public enum AcaoResposta1 {
+	NewUser(1),
+	IniciarJogo(2),
+	Ath(3),
+	Ganhou(4),
+	PegarTabelaJogos(5);
+	
+	public int numero;
+	
+	AcaoResposta1(int sta){
+		this.numero = sta;
+	}
+	
+	AcaoResposta1(AcaoPedido ap){
+		this.numero = ap.getnumero();
+	}
+	
+	public int getnumero(){
+		return this.numero;
+	}
+	
+}

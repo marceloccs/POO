@@ -1,5 +1,0 @@
-package bd.daos;
-
-public class Jogos implements Cloneable {
-
-}

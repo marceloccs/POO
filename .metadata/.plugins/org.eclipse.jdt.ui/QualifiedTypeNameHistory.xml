@@ -17,4 +17,18 @@
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
 <fullyQualifiedTypeName name="bd.dbos.TabelaJogos"/>
+<fullyQualifiedTypeName name="bd.dbos.Jogo"/>
+<fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
+<fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+<fullyQualifiedTypeName name="java.net.InetAddress"/>
+<fullyQualifiedTypeName name="Protocolo.ProtocoloResposta"/>
+<fullyQualifiedTypeName name="bingo.HomePanel"/>
+<fullyQualifiedTypeName name="business.User"/>
+<fullyQualifiedTypeName name="Protocolo.ProtocoloPedido"/>
+<fullyQualifiedTypeName name="Protocolo.AcaoPedido"/>
+<fullyQualifiedTypeName name="cliente.Constants"/>
+<fullyQualifiedTypeName name="cliente.ClienteNormal"/>
+<fullyQualifiedTypeName name="business.ListenerCreateUser"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="bingo.CadastrarPanel"/>
 </qualifiedTypeNameHistroy>

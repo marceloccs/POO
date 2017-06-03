@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import sun.awt.WindowClosingListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JPasswordField;
 
@@ -43,11 +46,10 @@ public class HomePanel extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton3.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Bingo.cadastro.setVisible(true);
-        		Bingo.home.setVisible(false);
+        		new CadastrarPanel().setVisible(true);
         	}
         });
-        jTextField1 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -64,8 +66,8 @@ public class HomePanel extends javax.swing.JFrame {
 
         jButton3.setText("Cadastrar-se");
 
-        jTextField1.setText("Email");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        email.setText("Email");
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
@@ -77,7 +79,7 @@ public class HomePanel extends javax.swing.JFrame {
 
         jLabel4.setText("HOME");
         
-        passwordField = new JPasswordField();
+        senha = new JPasswordField();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -87,7 +89,7 @@ public class HomePanel extends javax.swing.JFrame {
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addComponent(jLabel2)
         				.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        					.addComponent(passwordField, Alignment.LEADING)
+        					.addComponent(senha, Alignment.LEADING)
         					.addComponent(jLabel1, Alignment.LEADING)
         					.addGroup(Alignment.LEADING, layout.createSequentialGroup()
         						.addComponent(jButton1)
@@ -95,7 +97,7 @@ public class HomePanel extends javax.swing.JFrame {
         						.addComponent(jButton2)
         						.addPreferredGap(ComponentPlacement.RELATED)
         						.addComponent(jButton3))
-        					.addComponent(jTextField1, Alignment.LEADING)
+        					.addComponent(email, Alignment.LEADING)
         					.addComponent(jLabel3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         					.addComponent(jLabel4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         					.addComponent(jLabel5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -108,11 +110,11 @@ public class HomePanel extends javax.swing.JFrame {
         			.addGap(18)
         			.addComponent(jLabel1)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(23)
         			.addComponent(jLabel2)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(jLabel5)
         			.addGap(5)
@@ -178,6 +180,6 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private JPasswordField passwordField;
+    private javax.swing.JTextField email;
+    private JPasswordField senha;
 }

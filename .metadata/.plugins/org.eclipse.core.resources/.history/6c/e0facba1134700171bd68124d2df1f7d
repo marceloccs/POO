@@ -1,0 +1,15 @@
+package Protocolo;
+
+public class ProtocoloPedido {
+	private Object obj;
+	private AcaoPedido acao;
+	private String mensagem;
+	
+	public ProtocoloPedido(Object obj, AcaoPedido status, String ip){
+		this.obj = obj;
+		this.acao = status;
+	}
+	public String getIP(){
+		return this.getIP();
+	}
+}

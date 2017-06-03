@@ -6,14 +6,12 @@ import bd.daos.*;
 public class BD
 {
     public static final MeuPreparedStatement COMANDO;
-    public static final Livros               LIVROS;//um como esse para cada classe DAO
     public static final Users              	 USERS;//um como esse para cada classe DAO
     public static final Jogos                JOGOS;//um como esse para cada classe DAO
 
     static
     {
     	MeuPreparedStatement comando = null;
-     	Livros               livros  = null; //um como esse para cada classe DAO
      	Users              	 users  = null; //um como esse para cada classe DAO
      	Jogos              	 jogos  = null; //um como esse para cada classe DAO
 
@@ -25,7 +23,6 @@ public class BD
             				"jdbc:mysql://localhost:3306/mydb",
             				"root", "");
 
-            livros = new Livros (); //um como esse para cada classe DAO
             jogos = new Jogos (); //um como esse para cada classe DAO
             users = new Users (); //um como esse para cada classe DAO
         }
@@ -36,7 +33,6 @@ public class BD
         }
         
         COMANDO = comando;
-        LIVROS  = livros; //um como esse para cada classe DAO
         USERS  = users; //um como esse para cada classe DAO
         JOGOS  = jogos; //um como esse para cada classe DAO
     }

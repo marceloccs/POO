@@ -1,5 +1,0 @@
-package bd.dbos;
-
-public class JogosAnteriores implements Cloneable {
-
-}

@@ -1,0 +1,27 @@
+package Protocolo;
+
+import bd.BD;
+import bd.dbos.User;
+
+public enum AcaoPedido {
+	NewUser(1),
+	IniciarJogo(2),
+	Ath(3),
+	Ganhou(4),
+	PegarTabelaJogos(5);
+	
+	public int numero;
+	
+	AcaoPedido(int sta){
+		this.numero = sta;
+	}
+	
+	AcaoPedido(AcaoPedido ap){
+		this.numero = ap.getnumero();
+	}
+	
+	public int getnumero(){
+		return this.numero;
+	}
+	
+}

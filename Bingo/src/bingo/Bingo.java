@@ -13,16 +13,12 @@ import business.User;
  */
 public class Bingo {
 
-	static HomePanel home = new HomePanel();
-    static CadastrarPanel cadastro = new CadastrarPanel();
-    static User sesao;
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    	Bingo.home.setVisible(true);
-        
+    	
     }
     
 }

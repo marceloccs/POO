@@ -23,33 +23,33 @@ public enum AcaoPedido {
 	public int getnumero(){
 		return this.numero;
 	}
-	public Object acionarAcao(Object obj){
+	public Object acionarAcao(ProtocoloPedido proto){
 		Object ret = null;
 		try{
-			switch(this.numero){
+			switch(proto.getAcao().getnumero()){
 				case 1:
 					try{
 						AcaoResposta acao = AcaoResposta.NewUser;
-						User u = new User(obj);
+						User u = new User(proto.getObj());
 						BD.USERS.incluir(u);
-						ret = new ProtocoloResposta(null,acao, "sucesso ao inserir usaurio", true);
+						ret = new ProtocoloResposta(null,acao, "sucesso ao inserir usaurio", true,proto.getIP());
 					}catch(Exception e){
 						AcaoResposta acao = AcaoResposta.Erro;
-						ret = new ProtocoloResposta(null,acao, e.getMessage(), false);
+						ret = new ProtocoloResposta(null,acao, e.getMessage(), false,proto.getIP());
 					}
 					break;
 				case 2:
 					break;
 				case 3:
-					User u1 = new User(obj);
+					User u1 = new User(proto.getObj());
 					User aux;
 					try{
 						AcaoResposta acao = AcaoResposta.Ath;
 						aux = BD.USERS.auth(u1.getEmail(), u1.getPassword());
-						ret = new ProtocoloResposta(aux,acao, "sucesso ao atentificar usaurio", true);
+						ret = new ProtocoloResposta(aux,acao, "sucesso ao atentificar usaurio", true,proto.getIP());
 					}catch(Exception e){
 						AcaoResposta acao = AcaoResposta.Erro;
-						ret = new ProtocoloResposta(null,acao, e.getMessage(), false);
+						ret = new ProtocoloResposta(null,acao, e.getMessage(), false,proto.getIP());
 					}
 					break;
 				case 4:
@@ -57,17 +57,17 @@ public enum AcaoPedido {
 				case 5:
 					try{
 						AcaoResposta acao = AcaoResposta.PegarTabela;
-						ret = new ProtocoloResposta(BD.JOGOS.pegarUltimoMes(),acao,"Sucesso ao recuperar a lista",true);
+						ret = new ProtocoloResposta(BD.JOGOS.pegarUltimoMes(),acao,"Sucesso ao recuperar a lista",true,proto.getIP());
 					}catch(Exception e){
 						AcaoResposta acao = AcaoResposta.Erro;
-						ret = new ProtocoloResposta(null,acao, e.getMessage(), false);
+						ret = new ProtocoloResposta(null,acao, e.getMessage(), false,proto.getIP());
 					}
 					break;
 			}
 			
 		}catch(Exception e){
 			AcaoResposta acao = AcaoResposta.Erro;
-			ret = new ProtocoloResposta(null,acao, e.getMessage(), false);
+			ret = new ProtocoloResposta(null,acao, e.getMessage(), false,proto.getIP());
 		}
 		return ret;
 	}

@@ -1,6 +1,5 @@
 package bd.dbos;
 
-import protocolo.UserPadrao;
 
 public class User implements Cloneable {
 	private int id;
