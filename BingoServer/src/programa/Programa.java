@@ -2,6 +2,7 @@ package programa;
 
 import bd.*;
 import bd.dbos.*;
+import server.Servidor;
 
 public class Programa
 {
@@ -11,7 +12,10 @@ public class Programa
         {
             //User user = new User (11,"johns","j.zinho@gmail.com","jocker");
             //BD.USERS.excluir(11);
-            System.out.println(BD.JOGOS.pegarUltimoMes().toString());
+            //System.out.println(BD.JOGOS.pegarUltimoMes().toString());
+        	Servidor s = new Servidor(6666); 
+        	Thread t = new Thread (s);
+        	t.run();
         }
         catch (Exception erro)
         {
