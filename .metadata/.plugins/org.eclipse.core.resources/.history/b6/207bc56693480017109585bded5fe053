@@ -18,7 +18,6 @@ public class RecebedorNormal{
 	     // recebe msgs do servidor e imprime na tela
 		   ProtocoloResposta obj;
 		   while(1>0){
-			   System.out.println(this.servidor.readObject().toString());
 			   obj = (ProtocoloResposta)this.servidor.readObject();
 			   if(obj.getIP()==Constants.ipProprio){
 				   break;

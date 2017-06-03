@@ -25,7 +25,7 @@ public class ClienteNormal{
 	     Socket cliente = new Socket(this.host, this.porta);
 	     
 	     // lê msgs do teclado e manda pro servidor
-	     ObjectOutputStream  saida = new ObjectOutputStream(cliente.getOutputStream());
+	     OutputStream  saida = new OutputStream(cliente.getOutputStream());
 	     saida.writeObject(pedido);
 	     saida.flush();
 	     saida.close();

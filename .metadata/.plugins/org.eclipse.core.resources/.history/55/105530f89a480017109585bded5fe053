@@ -27,7 +27,6 @@ public class ClienteNormal{
 	     // lê msgs do teclado e manda pro servidor
 	     ObjectOutputStream  saida = new ObjectOutputStream(cliente.getOutputStream());
 	     saida.writeObject(pedido);
-	     saida.flush();
 	     saida.close();
 	     // thread para receber mensagens do servidor
 	     RecebedorNormal r = new RecebedorNormal(cliente.getInputStream());

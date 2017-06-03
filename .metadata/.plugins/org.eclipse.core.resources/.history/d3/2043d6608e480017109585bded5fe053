@@ -27,17 +27,16 @@ public class ClienteNormal{
 	     // lê msgs do teclado e manda pro servidor
 	     ObjectOutputStream  saida = new ObjectOutputStream(cliente.getOutputStream());
 	     saida.writeObject(pedido);
-	     saida.flush();
-	     saida.close();
+	     
 	     // thread para receber mensagens do servidor
 	     RecebedorNormal r = new RecebedorNormal(cliente.getInputStream());
 	     retorno = r.pegaObjeto();
+	     saida.close();
 	     cliente.close();    
 	     return retorno;
 	     
 	   }catch(Exception e){
-		   System.err.println(e.getStackTrace());
-		   System.err.println(e.getMessage());
+		   System.err.println(e.getStackTrace()));
 		   throw new Exception("erro ao se comunicar com o servidor"); 
 	   }
 	}
