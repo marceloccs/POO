@@ -18,7 +18,10 @@
 <fullyQualifiedTypeName name="java.util.Vector"/>
 <fullyQualifiedTypeName name="bd.dbos.TabelaJogos"/>
 <fullyQualifiedTypeName name="bd.dbos.Jogo"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+=======
+>>>>>>> aa9e5342ada668f293e1755f7f26e81c484e35e6
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
 <fullyQualifiedTypeName name="Protocolo.ProtocoloResposta"/>
 <fullyQualifiedTypeName name="bingo.HomePanel"/>
@@ -30,8 +33,14 @@
 <fullyQualifiedTypeName name="business.ListenerCreateUser"/>
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="bingo.CadastrarPanel"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="server.Servidor"/>
 <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
+=======
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
+<fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+>>>>>>> aa9e5342ada668f293e1755f7f26e81c484e35e6
 </qualifiedTypeNameHistroy>
