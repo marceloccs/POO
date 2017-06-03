@@ -1,19 +1,20 @@
 package server;
 
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 
 public class TrataClientes implements Runnable {
 
 	 
 
-	   private InputStream cliente;
+	   private ObjectInputStream cliente;
 
 	   private Servidor servidor;
 
 	 
 
-	   public TrataClientes(InputStream cliente, Servidor servidor) {
+	   public TrataClientes(ObjectInputStream cliente, Servidor servidor) {
 
 	     this.cliente = cliente;
 
@@ -30,6 +31,7 @@ public class TrataClientes implements Runnable {
 	     Scanner s = new Scanner(this.cliente);
 
 	     while (s.hasNextLine()) {
+	    	 System.out.println(s.nextLine());
 
 	       servidor.distribuiMensagem(s.nextLine());
 
