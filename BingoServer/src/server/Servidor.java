@@ -54,9 +54,9 @@ public class Servidor implements Runnable{
 	
 		       // adiciona saida do cliente à lista
 	
-		       ObjectInputStream ps = new ObjectInputStream(cliente.getInputStream());
+		       ObjectOutputStream ps = new ObjectOutputStream(cliente.getOutputStream());
 	
-		       this.clientes.add(ps);
+		       this.clientesRecebidores.add(ps);
 	
 		       
 	
@@ -81,7 +81,7 @@ public class Servidor implements Runnable{
 
 
 
-	public void distribuiMensagem(String msg) {
+	public void distribuiMensagem() {
 
 	     // envia msg para todo mundo
 
