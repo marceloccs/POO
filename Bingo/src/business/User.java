@@ -1,6 +1,8 @@
 package business;
 
-public class User implements Cloneable {
+import java.io.Serializable;
+
+public class User implements Cloneable,Serializable {
 	private int id;
 	private String nome;
 	private String email;

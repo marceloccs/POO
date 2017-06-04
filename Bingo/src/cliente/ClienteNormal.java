@@ -7,6 +7,10 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.SerializationUtils;
+
+import com.sun.org.apache.xml.internal.security.encryption.Serializer;
+
 import Protocolo.ProtocoloPedido;
 
 public class ClienteNormal{
@@ -26,7 +30,9 @@ public class ClienteNormal{
 	     
 	     // lê msgs do teclado e manda pro servidor
 	     ObjectOutputStream  saida = new ObjectOutputStream(cliente.getOutputStream());
-	     saida.writeObject(pedido);
+	     byte[] dataPedido = SerializationUtils.serialize(pedido);
+	     System.out.println(dataPedido.toString());
+	     saida.writeObject(dataPedido);
 	     saida.flush();
 	     saida.close();
 	     // thread para receber mensagens do servidor

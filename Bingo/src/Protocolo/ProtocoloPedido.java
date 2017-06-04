@@ -1,6 +1,8 @@
 package Protocolo;
 
-public class ProtocoloPedido {
+import java.io.Serializable;
+
+public class ProtocoloPedido implements Serializable{
 	private Object obj;
 	private AcaoPedido acao;
 	private String ip;
