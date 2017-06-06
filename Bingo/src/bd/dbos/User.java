@@ -1,8 +1,12 @@
-package business;
+package bd.dbos;
 
 import java.io.Serializable;
 
 public class User implements Cloneable,Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3116530670969802298L;
 	private int id;
 	private String nome;
 	private String email;
@@ -12,17 +16,17 @@ public class User implements Cloneable,Serializable {
 		this.id = id;
 	}
 	public void setNome(String nome) throws Exception{
-		if(nome==null)
-			throw new Exception ("noem do usuario invalido");
+		if((nome==null)||(nome.equals("")))
+			throw new Exception ("nome do usuario invalido");
 		this.nome = nome;
 	}
 	public void setEmail(String email) throws Exception{
-		if(email==null)
+		if((email==null)||(email.equals("")))
 			throw new Exception ("email do usuario invalido");
 		this.email = email;
 	}
 	public void setPassword(String password) throws Exception{
-		if(password==null)
+		if((password==null)||(password.equals("")))
 			throw new Exception ("password do usuario invalido");
 		this.password = password;
 	}

@@ -1,8 +1,13 @@
-package business;
+package bd.dbos;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Jogo implements Cloneable {
+public class Jogo implements Cloneable, Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2910239556884228850L;
 	private int id;
 	private Date dataTermino;
 	private User user;

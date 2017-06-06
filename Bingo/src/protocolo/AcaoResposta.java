@@ -1,4 +1,4 @@
-package Protocolo;
+package protocolo;
 
 public enum AcaoResposta {
 	NewUser(1),

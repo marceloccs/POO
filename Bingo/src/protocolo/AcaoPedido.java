@@ -1,4 +1,4 @@
-package Protocolo;
+package protocolo;
 
 public enum AcaoPedido {
 	NewUser(1),

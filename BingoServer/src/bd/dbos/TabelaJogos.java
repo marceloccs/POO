@@ -5,6 +5,7 @@ import java.util.Vector;
 
 public class TabelaJogos {
 	private Vector <Jogo> jogos = new Vector <Jogo> ();
+	private static final long serialVersionUID = 3062678996049843423L;
 	
 	public TabelaJogos(){}
 	

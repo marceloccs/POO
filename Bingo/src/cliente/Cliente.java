@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import Protocolo.ProtocoloPedido;
+import protocolo.ProtocoloPedido;
 
 public class Cliente implements Runnable{
 	  private String host = Constants.host;

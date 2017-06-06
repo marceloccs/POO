@@ -41,3 +41,4 @@ public class ProtocoloResposta implements Serializable{
 						+ "Com a seguinte informação dentro: "+this.getObjeto();
 	}
 }
+

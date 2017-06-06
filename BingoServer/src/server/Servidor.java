@@ -9,6 +9,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.SerializationUtils;
+
+import protocolo.ProtocoloResposta;
+
 public class Servidor implements Runnable{
 	private int porta;
 
@@ -81,21 +85,22 @@ public class Servidor implements Runnable{
 
 
 
-	public void distribuiMensagem() {
+	public void distribuiMensagem(ProtocoloResposta obj) throws IOException {
 
 	     // envia msg para todo mundo
 
 	     for (ObjectOutputStream cliente : this.clientesRecebidores) {
 
 	       try {
-			cliente.writeObject(new String ("Recebi"));
+	    	 byte[] dataresposta = SerializationUtils.serialize(obj);
+	    	 cliente.writeObject(dataresposta);
+	    	 cliente.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	     }
-
-	   }
+}
 
 	 }

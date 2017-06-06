@@ -3,6 +3,7 @@ package bd.dbos;
 import java.sql.Date;
 
 public class Jogo implements Cloneable {
+	private static final long serialVersionUID = 2910239556884228850L;
 	private int id;
 	private Date dataTermino;
 	private User user;

@@ -9,24 +9,30 @@ import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import listener.ListenerAbreFechaTelas;
+import listener.ListenerCreateUser;
 import sun.awt.WindowClosingListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPasswordField;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 /**
  *
  * @author Ultron
  */
 public class HomePanel extends javax.swing.JFrame {
+	
 
+    ListenerAbreFechaTelas abreCadastrar = new ListenerAbreFechaTelas(this,"CadastrarPanel");
+    //ListenerAbreFechaTelas createUser = new ListenerCreateUser(this);
     /**
      * Creates new form Home
      */
     public HomePanel() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +43,10 @@ public class HomePanel extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jButton1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         jButton2 = new javax.swing.JButton();
         jButton2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -44,11 +54,7 @@ public class HomePanel extends javax.swing.JFrame {
         	}
         });
         jButton3 = new javax.swing.JButton();
-        jButton3.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		new CadastrarPanel().setVisible(true);
-        	}
-        });
+        jButton3.addActionListener(abreCadastrar);
         email = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -170,6 +176,9 @@ public class HomePanel extends javax.swing.JFrame {
             }
         });
     }
+    public void fechaTela(){
+    	this.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -182,4 +191,13 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField email;
     private JPasswordField senha;
+    private final Action action = new SwingAction();
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
 }

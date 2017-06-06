@@ -1,7 +1,9 @@
 package bd.dbos;
 
+import java.io.Serializable;
 
-public class User implements Cloneable {
+public class User implements Cloneable, Serializable {
+	private static final long serialVersionUID = 3116530670969802298L;
 	private int id;
 	private String nome;
 	private String email;
@@ -54,6 +56,16 @@ public class User implements Cloneable {
 	public User (Object obj) throws Exception {
 		try{
 			User user = (User) obj;
+			this.id=user.getID();
+			this.nome=user.getNome();
+			this.email=user.getEmail();
+			this.password=user.getPassword();
+		}catch (Exception e){
+			throw new Exception("A classe não é compativel com um user");
+		}
+	}
+	public User (User user) throws Exception {
+		try{
 			this.id=user.getID();
 			this.nome=user.getNome();
 			this.email=user.getEmail();

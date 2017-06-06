@@ -5,7 +5,7 @@
  */
 package bingo;
 
-import business.User;
+import bd.dbos.User;
 
 /**
  *

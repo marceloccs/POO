@@ -11,8 +11,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import business.ListenerCreateUser;
-import business.User;
+import bd.dbos.User;
+import listener.ListenerAbreFechaTelas;
+import listener.ListenerCreateUser;
 
 import javax.swing.GroupLayout;
 import javax.swing.JTextField;
@@ -31,6 +32,7 @@ public class CadastrarPanel extends javax.swing.JFrame {
      * Creates new form CadastrarPanel
      */
     public CadastrarPanel() {
+    	setTitle("CADASTRAR");
         initComponents();
     }
 	/**
@@ -40,7 +42,8 @@ public class CadastrarPanel extends javax.swing.JFrame {
      */ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    ListenerCreateUser createUser = new ListenerCreateUser(this); 
+    ListenerAbreFechaTelas abreCadastrar = new ListenerAbreFechaTelas(this,"HomePanel");
+    ListenerCreateUser createUser = new ListenerCreateUser(this);
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,10 +52,7 @@ public class CadastrarPanel extends javax.swing.JFrame {
         btnCompletar.addActionListener(createUser);
         
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
+        btnCancelar.addActionListener(abreCadastrar);
         
         JLabel lblEmail = new JLabel("Email");
         
@@ -154,8 +154,8 @@ public class CadastrarPanel extends javax.swing.JFrame {
     }
     public User creatUser() throws Exception{
     	User user = new User(
-    			this.email.getText(),
     			this.nome.getText(),
+    			this.email.getText(),
     			this.passwordField.getText()
     	);
     	return user;
@@ -163,4 +163,10 @@ public class CadastrarPanel extends javax.swing.JFrame {
     public void printa(String text){
     	this.resposta.setText(text);
     }
+
+	public void bloqueiCaixas() {
+		this.email.setEnabled(false);
+		this.nome.setEnabled(false);
+		this.passwordField.setEnabled(false);
+	}
 }

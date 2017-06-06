@@ -11,7 +11,8 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import com.sun.org.apache.xml.internal.security.encryption.Serializer;
 
-import Protocolo.ProtocoloPedido;
+import protocolo.ProtocoloPedido;
+import protocolo.ProtocoloResposta;
 
 public class ClienteNormal{
 	  private String host = Constants.host;
@@ -23,22 +24,21 @@ public class ClienteNormal{
 		   this.pedido = per;
 	   }
 
-	   public Object realizapedido() throws Exception{
-		 Object retorno = null;
+	   public ProtocoloResposta realizapedido() throws Exception{
+		  ProtocoloResposta retorno = null;
 		 try{
 	     Socket cliente = new Socket(this.host, this.porta);
 	     
 	     // lê msgs do teclado e manda pro servidor
 	     ObjectOutputStream  saida = new ObjectOutputStream(cliente.getOutputStream());
 	     byte[] dataPedido = SerializationUtils.serialize(pedido);
-	     System.out.println(dataPedido.toString());
 	     saida.writeObject(dataPedido);
 	     saida.flush();
-	     saida.close();
 	     // thread para receber mensagens do servidor
 	     RecebedorNormal r = new RecebedorNormal(cliente.getInputStream());
 	     retorno = r.pegaObjeto();
-	     cliente.close();    
+	     cliente.close();
+	     saida.close();
 	     return retorno;
 	     
 	   }catch(Exception e){

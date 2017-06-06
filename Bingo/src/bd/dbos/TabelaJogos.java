@@ -1,9 +1,15 @@
-package business;
+package bd.dbos;
 
-import business.Jogo;
+import java.io.Serializable;
 import java.util.Vector;
 
-public class TabelaJogos {
+import bd.dbos.Jogo;
+
+public class TabelaJogos implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3062678996049843423L;
 	private Vector <Jogo> jogos = new Vector <Jogo> ();
 	
 	public TabelaJogos(){}

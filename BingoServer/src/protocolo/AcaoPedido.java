@@ -23,16 +23,16 @@ public enum AcaoPedido {
 	public int getnumero(){
 		return this.numero;
 	}
-	public Object acionarAcao(ProtocoloPedido proto){
-		Object ret = null;
+	public ProtocoloResposta acionarAcao(ProtocoloPedido proto){
+		ProtocoloResposta ret = null;
 		try{
 			switch(proto.getAcao().getnumero()){
 				case 1:
 					try{
 						AcaoResposta acao = AcaoResposta.NewUser;
-						User u = new User(proto.getObj());
+						User u = new User((User) proto.getObj());
 						BD.USERS.incluir(u);
-						ret = new ProtocoloResposta(null,acao, "sucesso ao inserir usaurio", true,proto.getIP());
+						ret = new ProtocoloResposta(null,acao, "sucesso ao inserir usuario", true,proto.getIP());
 					}catch(Exception e){
 						AcaoResposta acao = AcaoResposta.Erro;
 						ret = new ProtocoloResposta(null,acao, e.getMessage(), false,proto.getIP());
