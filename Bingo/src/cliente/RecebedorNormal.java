@@ -25,7 +25,7 @@ public class RecebedorNormal{
 	     // recebe msgs do servidor e imprime na tela
 		   ProtocoloResposta ret = null;
 		   int tempo=0;
-		   int tempoLimite=100000;
+		   int tempoLimite=90000000;
 		   while(1>0){
 			   //System.out.println(this.servidor.readObject().getClass().toString());
 			   byte[] ser = (byte[]) this.servidor.readObject();
@@ -35,7 +35,6 @@ public class RecebedorNormal{
 				   ret=proto;
 				   break;
 			   }
-			   Thread.sleep(1000);
 			   tempo++;
 		   }
 		   if(ret==null){

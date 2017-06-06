@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import bd.dbos.User;
 import listener.ListenerAbreFechaTelas;
+import listener.ListenerAuthUser;
 import listener.ListenerCreateUser;
 import sun.awt.WindowClosingListener;
 
@@ -17,6 +19,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JPasswordField;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import java.awt.Color;
 
 /**
  *
@@ -27,6 +30,7 @@ public class HomePanel extends javax.swing.JFrame {
 
     ListenerAbreFechaTelas abreCadastrar = new ListenerAbreFechaTelas(this,"CadastrarPanel");
     //ListenerAbreFechaTelas createUser = new ListenerCreateUser(this);
+    ListenerAuthUser createUser = new ListenerAuthUser(this); 
     /**
      * Creates new form Home
      */
@@ -43,10 +47,7 @@ public class HomePanel extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton1.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
+        jButton1.addActionListener(createUser);
         jButton2 = new javax.swing.JButton();
         jButton2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -59,7 +60,8 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        resposta = new javax.swing.JLabel();
+        resposta.setForeground(Color.RED);
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,8 +73,6 @@ public class HomePanel extends javax.swing.JFrame {
         jButton2.setText("Sair");
 
         jButton3.setText("Cadastrar-se");
-
-        email.setText("Email");
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -82,8 +82,6 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel1.setText("Email");
 
         jLabel2.setText("Senha");
-
-        jLabel4.setText("HOME");
         
         senha = new JPasswordField();
 
@@ -93,27 +91,29 @@ public class HomePanel extends javax.swing.JFrame {
         		.addGroup(layout.createSequentialGroup()
         			.addGap(81)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jLabel2)
-        				.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        					.addComponent(senha, Alignment.LEADING)
-        					.addComponent(jLabel1, Alignment.LEADING)
-        					.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        						.addComponent(jButton1)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addComponent(jButton2)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addComponent(jButton3))
-        					.addComponent(email, Alignment.LEADING)
-        					.addComponent(jLabel3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(jLabel4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(jLabel5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        			.addContainerGap(88, Short.MAX_VALUE))
+        				.addComponent(resposta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel2)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addComponent(senha)
+        							.addComponent(jLabel1)
+        							.addGroup(layout.createSequentialGroup()
+        								.addComponent(jButton1)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jButton2)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jButton3))
+        							.addComponent(email)
+        							.addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(jLabel5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        					.addContainerGap(88, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
+        			.addComponent(resposta, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(jLabel1)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -187,7 +187,7 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel resposta;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField email;
     private JPasswordField senha;
@@ -199,5 +199,28 @@ public class HomePanel extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
+	}
+	
+	public void printa(String text){
+    	this.resposta.setText(text);
+    }
+
+	public void bloqueiCaixas() {
+		this.email.setEnabled(false);
+		this.senha.setEnabled(false);
+	}
+	public User createUser(){
+		User user = null;
+		try {
+			user = new User(
+					this.email.getText(),
+					this.senha.getText()
+					);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return user;
 	}
 }
