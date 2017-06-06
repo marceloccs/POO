@@ -1,6 +1,0 @@
-INDEX VERSION 1.130+E:\faculdade\poo\.metadata\.plugins\org.eclipse.jdt.core
-1872904646.index
-867131044.index
-3281869265.index
-2066874042.index
-1040244877.index

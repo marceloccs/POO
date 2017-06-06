@@ -1,6 +1,0 @@
-package cliente;
-
-public class Constants {
-	static public int porta = 6666;
-	static public String host = "125.12.1.100";
-}

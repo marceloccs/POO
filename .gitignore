@@ -5,4 +5,7 @@
 /Labirinto/build/
 /Bingo/nbproject/private/
 /Bingo/build/
-/.metadata
+.metadata
+/.metadata/
+.metadata/
+.recommenders/

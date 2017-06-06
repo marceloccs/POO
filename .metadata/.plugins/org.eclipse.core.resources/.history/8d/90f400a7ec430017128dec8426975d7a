@@ -1,5 +1,0 @@
-package protocolo;
-
-public interface UserPadrao {
-
-}
