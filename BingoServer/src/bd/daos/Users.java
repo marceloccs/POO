@@ -68,10 +68,6 @@ public class Users implements Cloneable {
 
         BD.COMANDO.setString    (1, login);
         BD.COMANDO.setString (2, password);
-		
-
-        BD.COMANDO.executeUpdate ();
-        BD.COMANDO.commit        ();
         
         MeuResultSet resultado = (MeuResultSet)BD.COMANDO.executeQuery ();
 

@@ -16,8 +16,8 @@ public class User implements Cloneable,Serializable {
 		this.id = id;
 	}
 	public void setNome(String nome) throws Exception{
-		if((nome==null)||(nome.equals("")))
-			throw new Exception ("nome do usuario invalido");
+		//if((nome==null)||(nome.equals("")))
+			//throw new Exception ("nome do usuario invalido");
 		this.nome = nome;
 	}
 	public void setEmail(String email) throws Exception{
@@ -90,6 +90,17 @@ public class User implements Cloneable,Serializable {
 	}
 	public String toString(){
 		return "ID: "+this.getID()+" Nome: "+this.getNome()+" Email:"+this.getEmail()+" Password: "+this.getPassword();
+	}
+	public User clone(){
+		return new User(this);
+	}
+	public User (User u){
+		try{
+			this.id=u.id;
+			this.nome=u.email;
+			this.email=u.getEmail();
+			this.password=u.password;
+		}catch (Exception e){}
 	}
 
 }

@@ -5,14 +5,21 @@
  */
 package bingo;
 import java.awt.event.ActionListener;
+import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import bd.dbos.TabelaJogos;
 import bd.dbos.User;
+import cliente.ClienteNormal;
+import cliente.Constants;
 import listener.ListenerAbreFechaTelas;
 import listener.ListenerAuthUser;
 import listener.ListenerCreateUser;
+import protocolo.AcaoPedido;
+import protocolo.ProtocoloPedido;
+import protocolo.ProtocoloResposta;
 import sun.awt.WindowClosingListener;
 
 import javax.swing.GroupLayout;
@@ -59,7 +66,7 @@ public class HomePanel extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        tabela = new javax.swing.JLabel();
         resposta = new javax.swing.JLabel();
         resposta.setForeground(Color.RED);
         jLabel5 = new javax.swing.JLabel();
@@ -105,7 +112,7 @@ public class HomePanel extends javax.swing.JFrame {
         								.addPreferredGap(ComponentPlacement.RELATED)
         								.addComponent(jButton3))
         							.addComponent(email)
-        							.addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(tabela, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         							.addComponent(jLabel5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         					.addContainerGap(88, Short.MAX_VALUE))))
         );
@@ -129,9 +136,14 @@ public class HomePanel extends javax.swing.JFrame {
         				.addComponent(jButton2)
         				.addComponent(jButton3))
         			.addGap(18)
-        			.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(tabela, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap())
         );
+        try {
+			this.exibiTabela();
+		} catch (Exception e) {
+			this.tabela.setText("não foi possivel carregar a tabela de ganhadores");
+		}
         getContentPane().setLayout(layout);
 
         pack();
@@ -186,7 +198,7 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel tabela;
     private javax.swing.JLabel resposta;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField email;
@@ -209,10 +221,18 @@ public class HomePanel extends javax.swing.JFrame {
 		this.email.setEnabled(false);
 		this.senha.setEnabled(false);
 	}
+	private void exibiTabela() throws Exception{
+		Constants cons = new Constants();
+		ProtocoloPedido protocolo = new ProtocoloPedido(null, AcaoPedido.PegarTabelaJogos, cons.getIP());
+		ClienteNormal cli = new ClienteNormal(protocolo);
+		ProtocoloResposta ret = cli.realizapedido();
+		this.tabela.setText(((TabelaJogos)ret.getObjeto()).toString());
+	}
 	public User createUser(){
 		User user = null;
 		try {
 			user = new User(
+					null,
 					this.email.getText(),
 					this.senha.getText()
 					);

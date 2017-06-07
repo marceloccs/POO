@@ -21,9 +21,10 @@ public class ListenerAuthUser implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		this.view.bloqueiCaixas();
+		//this.view.bloqueiCaixas();
 		try {
 			User user = view.createUser();
+			System.out.println(user.toString());
 			Constants cons = new Constants();
 			ProtocoloPedido protocolo = new ProtocoloPedido(user, AcaoPedido.Ath, cons.getIP());
 			ClienteNormal cli = new ClienteNormal(protocolo);

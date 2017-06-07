@@ -13,6 +13,7 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JTextPane;
+import javax.swing.JToggleButton;
 import javax.swing.DropMode;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -82,7 +83,7 @@ public class BingoPanel extends JFrame {
 					Random rand = new Random();
 					Integer randomNum = rand.nextInt((max - min) + 1) + min;
 					numerosSorteados[i][j] =randomNum.toString(); 
-					buttonPanel.add(new JButton(new Integer(randomNum).toString()));
+					buttonPanel.add(new JToggleButton(new Integer(randomNum).toString()));
 				/*}else{
 					numerosSorteados[i][j] = "Bingo";
 					buttonPanel.add((new JButton("Bingo")));

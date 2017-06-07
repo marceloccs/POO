@@ -1,9 +1,11 @@
 package bd.dbos;
 
 import bd.dbos.Jogo;
+
+import java.io.Serializable;
 import java.util.Vector;
 
-public class TabelaJogos {
+public class TabelaJogos implements Serializable {
 	private Vector <Jogo> jogos = new Vector <Jogo> ();
 	private static final long serialVersionUID = 3062678996049843423L;
 	

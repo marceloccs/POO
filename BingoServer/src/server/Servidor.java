@@ -88,7 +88,7 @@ public class Servidor implements Runnable{
 	public void distribuiMensagem(ProtocoloResposta obj) throws IOException {
 
 	     // envia msg para todo mundo
-
+		 obj.getObjeto().toString();
 	     for (ObjectOutputStream cliente : this.clientesRecebidores) {
 
 	       try {

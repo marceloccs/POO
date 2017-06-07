@@ -13,8 +13,8 @@ public class User implements Cloneable, Serializable {
 		this.id = id;
 	}
 	public void setNome(String nome) throws Exception{
-		if(nome==null)
-			throw new Exception ("noem do usuario invalido");
+		//if(nome==null)
+			//throw new Exception ("noem do usuario invalido");
 		this.nome = nome;
 	}
 	public void setEmail(String email) throws Exception{
