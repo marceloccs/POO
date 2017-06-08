@@ -2,6 +2,8 @@ package protocolo;
 
 import bd.BD;
 import bd.dbos.User;
+import programa.IniciadorJogo;
+import programa.Programa;
 
 public enum AcaoPedido {
 	NewUser(1),
@@ -39,6 +41,15 @@ public enum AcaoPedido {
 					}
 					break;
 				case 2:
+					try{
+						//IniciadorJogo jogo = new IniciadorJogo();
+						//int porta = jogo.iniciaJogo();
+						AcaoResposta acao = AcaoResposta.IniciarJogo;
+						ret = new ProtocoloResposta(null,acao, "JogoIniciando", true,proto.getIP());
+					}catch(Exception e){
+						AcaoResposta acao = AcaoResposta.Erro;
+						ret = new ProtocoloResposta(null,acao, e.getMessage(), false,proto.getIP());
+					}
 					break;
 				case 3:
 					User u1 = new User(proto.getObj());

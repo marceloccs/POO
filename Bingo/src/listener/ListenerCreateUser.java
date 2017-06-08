@@ -32,7 +32,10 @@ public class ListenerCreateUser implements ActionListener {
 			ProtocoloResposta ret = cli.realizapedido();
 			//ret.getIP();
 			this.view.printa(ret.getMensagem());
-			this.view.bloqueiCaixas();
+			if(ret.getSucesso()){
+				this.view.bloqueiCaixas();
+				this.view.trocaNomeCancelar();
+			}
 		} catch (Exception e) {
 			this.view.printa(e.getMessage());
 		}

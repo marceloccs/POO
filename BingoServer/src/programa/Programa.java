@@ -3,6 +3,8 @@ package programa;
 import bd.*;
 import bd.dbos.*;
 import server.Servidor;
+import server.ServidorJogo;
+import server.Sorteio;
 
 public class Programa
 {
@@ -15,12 +17,19 @@ public class Programa
             //System.out.println(BD.JOGOS.pegarUltimoMes().toString());
         	Servidor s = new Servidor(9999); 
         	Thread t = new Thread (s);
-        	t.run();
+        	t.start();
+        	ServidorJogo sj = new ServidorJogo(6666); 
+        	Thread tj = new Thread (sj);
+        	tj.start();
+        	Sorteio sorte = new Sorteio(sj);
+        	Thread te = new Thread (sorte);
+        	te.start();
+        	
         }
         catch (Exception erro)
         {
             System.err.println (erro.getStackTrace());
             System.err.println (erro.getCause());
         }
-    } 
+    }
 }

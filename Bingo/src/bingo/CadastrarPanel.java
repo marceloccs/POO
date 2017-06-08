@@ -28,6 +28,7 @@ public class CadastrarPanel extends javax.swing.JFrame {
 	private JTextField nome;
 	private JPasswordField passwordField;
 	private JLabel resposta;
+	private JButton btnCancelar;
     /**
      * Creates new form CadastrarPanel
      */
@@ -51,8 +52,8 @@ public class CadastrarPanel extends javax.swing.JFrame {
         
         btnCompletar.addActionListener(createUser);
         
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.addActionListener(abreCadastrar);
+        this.btnCancelar = new JButton("Cancelar");
+        this.btnCancelar.addActionListener(abreCadastrar);
         
         JLabel lblEmail = new JLabel("Email");
         
@@ -162,6 +163,9 @@ public class CadastrarPanel extends javax.swing.JFrame {
     }
     public void printa(String text){
     	this.resposta.setText(text);
+    }
+    public void trocaNomeCancelar(){
+    	this.btnCancelar.setText("Voltar para HOME");
     }
 
 	public void bloqueiCaixas() {

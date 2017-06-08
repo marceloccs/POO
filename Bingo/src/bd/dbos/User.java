@@ -1,6 +1,7 @@
 package bd.dbos;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 public class User implements Cloneable,Serializable {
 	/**
@@ -102,5 +103,14 @@ public class User implements Cloneable,Serializable {
 			this.password=u.password;
 		}catch (Exception e){}
 	}
+	public int hashCode(){
+        int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+       
+        ret = 7 * ret + this.nome.hashCode();
+        ret = 7 * ret + new Integer(this.id).hashCode();
+        ret = 7 * ret + this.password.hashCode();
+        ret = 7 * ret + this.email.hashCode();
+        return ret;
+    }
 
 }

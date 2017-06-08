@@ -1,8 +1,13 @@
 package bd.dbos;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.Vector;
 
-public class Jogo implements Cloneable {
+public class Jogo implements Cloneable, Serializable  {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 2910239556884228850L;
 	private int id;
 	private Date dataTermino;
@@ -62,5 +67,37 @@ public class Jogo implements Cloneable {
 		return "ID: "+this.id+" Data de termino: "+this.dataTermino+ " User ID: "+this.user.getID()+" Nome User: "+ this.user.getNome();
 	}
 	
+	public int hashCode(){
+        int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+       
+        ret = 7 * ret + new Integer(this.id).hashCode();
+        ret = 7 * ret + this.dataTermino.hashCode();
+        ret = 7 * ret + this.user.hashCode();
+        return ret;
+    }
+	public Object clone(){
+        return new Jogo(this);
+    }
+    public Jogo (Jogo j){
+        try{
+        	this.id = j.id;
+        	this.dataTermino = (Date) j.dataTermino.clone();
+        	this.user=j.user;
+        }catch (Exception e){}
+    }
+    public boolean equals(Object obj){
+    	try{
+    		Jogo c = (Jogo)obj;
+    		if(!(c.id==this.id))
+    			return false;
+    		if(!c.dataTermino.equals(this.dataTermino))
+    			return false;
+    		if(!c.user.equals(this.user))
+    			return false;
+    		return true;
+    	}catch(Exception e){
+    		return false;
+    	}
+    }
 
 }

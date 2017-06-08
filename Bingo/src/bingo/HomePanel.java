@@ -226,7 +226,7 @@ public class HomePanel extends javax.swing.JFrame {
 		ProtocoloPedido protocolo = new ProtocoloPedido(null, AcaoPedido.PegarTabelaJogos, cons.getIP());
 		ClienteNormal cli = new ClienteNormal(protocolo);
 		ProtocoloResposta ret = cli.realizapedido();
-		this.tabela.setText(((TabelaJogos)ret.getObjeto()).toString());
+		this.tabela.setText(((TabelaJogos)ret.getObjeto()).returnHtml());
 	}
 	public User createUser(){
 		User user = null;
@@ -242,5 +242,9 @@ public class HomePanel extends javax.swing.JFrame {
 		}
 		
 		return user;
+	}
+	public void clear(){
+		this.email.setText("");
+		this.senha.setText("");
 	}
 }

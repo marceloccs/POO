@@ -1,10 +1,9 @@
 package server;
 
-import java.awt.List;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -13,22 +12,24 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import protocolo.ProtocoloResposta;
 
-public class Servidor implements Runnable{
+public class ServidorJogo implements Runnable{
 	private int porta;
 
 	   private ArrayList<ObjectInputStream> clientes;
 	   private ArrayList<ObjectOutputStream> clientesRecebidores;
-
+	   private Sorteio sorte;
+	   private Thread ts = new Thread(this.sorte); 
 	private boolean runner = true;
 
 	   
 
-	   public Servidor (int porta) {
+	   public ServidorJogo (int porta) {
 
 	     this.porta = porta;
 
 	     this.clientes = new ArrayList<ObjectInputStream>();
 	     this.clientesRecebidores = new ArrayList<ObjectOutputStream>();
+	     this.sorte = new Sorteio(this);
 
 	   }
 
@@ -43,32 +44,19 @@ public class Servidor implements Runnable{
 		     
 	
 		     while (this.runner=true) {
-	
+		       
 		       // aceita um cliente
-	
-		       Socket cliente = servidor.accept();
-	
-		       System.out.println("Nova conexão com o cliente " +   
-	
-		         cliente.getInetAddress().getHostAddress()
-	
-		       );
-	
-		       
-	
+			   Socket cliente = servidor.accept();
+			   this.ts.start();
+			   System.out.println("Nova conexão com o cliente "+cliente.getInetAddress().getHostAddress());
+			   
 		       // adiciona saida do cliente à lista
-	
 		       ObjectOutputStream ps = new ObjectOutputStream(cliente.getOutputStream());
-	
 		       this.clientesRecebidores.add(ps);
-	
-		       
-	
 		       // cria tratador de cliente numa nova thread
-	
-		       TrataClientes tc = new TrataClientes(new ObjectInputStream(cliente.getInputStream()), this);
-	
-		       new Thread(tc).start();
+		       //TrataClientes tc = new TrataClientes(new ObjectInputStream(cliente.getInputStream()), this);
+		       //new Thread(tc).start();
+		       
 		     }
 		 }catch(Exception e){
 			 System.out.println(e.getMessage());
@@ -85,13 +73,13 @@ public class Servidor implements Runnable{
 
 
 
-	public void distribuiMensagem(ProtocoloResposta obj) throws IOException {
+	public void distribuiMensagem(Object obj) throws IOException {
 
 	     // envia msg para todo mundo
 	     for (ObjectOutputStream cliente : this.clientesRecebidores) {
 
 	       try {
-	    	 byte[] dataresposta = SerializationUtils.serialize(obj);
+	    	 byte[] dataresposta = SerializationUtils.serialize((Serializable) obj);
 	    	 cliente.writeObject(dataresposta);
 	    	 cliente.flush();
 		} catch (IOException e) {
@@ -101,5 +89,4 @@ public class Servidor implements Runnable{
 
 	     }
 }
-
-	 }
+}
