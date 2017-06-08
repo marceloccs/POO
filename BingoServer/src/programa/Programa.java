@@ -21,9 +21,6 @@ public class Programa
         	ServidorJogo sj = new ServidorJogo(6666); 
         	Thread tj = new Thread (sj);
         	tj.start();
-        	Sorteio sorte = new Sorteio(sj);
-        	Thread te = new Thread (sorte);
-        	te.start();
         	
         }
         catch (Exception erro)

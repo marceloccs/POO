@@ -6,7 +6,7 @@ import java.util.Vector;
 import protocolo.AcaoResposta;
 import protocolo.ProtocoloResposta;
 
-public class Sorteio implements Runnable {
+public class Sorteio extends Thread implements Runnable{
 	
 	private Vector <String> valoresSortiados = new Vector<String>(99);
 	private boolean runner=false;
@@ -16,7 +16,7 @@ public class Sorteio implements Runnable {
 	}
 	
 	@Override
-	public void run() {
+	public void start() {
 		int max = 99;
 		int min = 1;
 		this.runner=true;
@@ -24,7 +24,7 @@ public class Sorteio implements Runnable {
 			//this.wait(5000);
 			do{
 
-				this.wait(100);
+				super.sleep(5000);
 				while(true){
 					Random rand = new Random();
 					Integer randomNum = rand.nextInt((max - min) + 1) + min;
@@ -32,7 +32,7 @@ public class Sorteio implements Runnable {
 						this.valoresSortiados.add(randomNum.toString());
 						ProtocoloResposta resp = new ProtocoloResposta(randomNum.toString(), AcaoResposta.NumeroSortiado, "Novo Numero Sorteado", true, null);
 						servidor.distribuiMensagem(resp);
-						System.out.println(randomNum.toString());
+						//System.out.println(randomNum.toString());
 					}
 				}
 			}while(this.runner==true);

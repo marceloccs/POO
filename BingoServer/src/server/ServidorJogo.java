@@ -18,8 +18,7 @@ public class ServidorJogo implements Runnable{
 	   private ArrayList<ObjectInputStream> clientes;
 	   private ArrayList<ObjectOutputStream> clientesRecebidores;
 	   private Sorteio sorte;
-	   private Thread ts = new Thread(this.sorte); 
-	private boolean runner = true;
+	   private boolean runner = true;
 
 	   
 
@@ -30,6 +29,9 @@ public class ServidorJogo implements Runnable{
 	     this.clientes = new ArrayList<ObjectInputStream>();
 	     this.clientesRecebidores = new ArrayList<ObjectOutputStream>();
 	     this.sorte = new Sorteio(this);
+	     //ts = new Thread(sorte);
+		 //this.ts.start();
+	     this.sorte.start();
 
 	   }
 
@@ -47,7 +49,6 @@ public class ServidorJogo implements Runnable{
 		       
 		       // aceita um cliente
 			   Socket cliente = servidor.accept();
-			   this.ts.start();
 			   System.out.println("Nova conexão com o cliente "+cliente.getInetAddress().getHostAddress());
 			   
 		       // adiciona saida do cliente à lista
@@ -76,6 +77,7 @@ public class ServidorJogo implements Runnable{
 	public void distribuiMensagem(Object obj) throws IOException {
 
 	     // envia msg para todo mundo
+		System.out.println(obj.toString());
 	     for (ObjectOutputStream cliente : this.clientesRecebidores) {
 
 	       try {

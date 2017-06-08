@@ -55,10 +55,10 @@ public class ProcuradorCaminho implements Cloneable{
                     try{
                         if (this.possibilidades.getValor().getNumeroValores()==0){
                             do{
-                                System.out.println(this.mapa.setCaractere(this.atual, " "));
+                                this.mapa.setCaractere(this.atual, " ");
                                 this.caminho.jogueFora();
                                 this.possibilidades.jogueFora();
-                                System.out.println(this.atual = this.mapa.cameBack(this.atual).clone());
+                                this.atual = this.mapa.cameBack(this.atual).clone();
                                 System.out.println(this.atual);
                                 //System.out.println(this.mapa.cameBack(this.atual));
                                 //System.out.println(this.mapa.toString());
@@ -87,6 +87,7 @@ public class ProcuradorCaminho implements Cloneable{
      */
     public String toString(){
         String ret ="";
+        //ret=ret+"Labirinto\n"+this.mapa.toString();
         ret=ret+"\nCaminho:\n"+this.caminho.toString();
         ret=ret+"\nFim do labirinto: "+this.fim.toString();
         return ret;
