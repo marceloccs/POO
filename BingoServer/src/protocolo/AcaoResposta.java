@@ -12,6 +12,9 @@ public enum AcaoResposta {
 	NumeroSortiado(9),
 	ParaJogo(10),
 	ImpossivelEntrarJogo(11),
+	AlarmeFalso(12),
+	Errou(13),
+	VoltaJogo(14),
 	Erro(0);
 	
 	public int numero;

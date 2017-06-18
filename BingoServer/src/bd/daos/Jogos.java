@@ -256,5 +256,16 @@ public class Jogos implements Cloneable {
 
         return resultado;
     }
+
+	@Override
+	public String toString() {
+		try {
+			return "Jogos [pegarUltimoMes()=" + pegarUltimoMes() + ", getJogos()=" + getJogos() + "]";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
     
 }

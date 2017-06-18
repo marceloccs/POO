@@ -15,6 +15,10 @@ public class ListenerAbreFechaTelas implements ActionListener {
 		this.fecha = fecha;
 		this.abre = abre;
 	}
+	public ListenerAbreFechaTelas(ListenerAbreFechaTelas listenerAbreFechaTelas) {
+		this.abre=listenerAbreFechaTelas.abre;
+		this.fecha=listenerAbreFechaTelas.fecha;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
@@ -26,6 +30,36 @@ public class ListenerAbreFechaTelas implements ActionListener {
 			e1.printStackTrace();
 		}
 		//abre.setVisible(true);
+	}
+	
+	public Object clone(){
+		return new ListenerAbreFechaTelas(this);
+	}
+	public boolean equals(Object obj){
+		try{
+			if(this == obj)
+				return true;
+			ListenerAbreFechaTelas ls = (ListenerAbreFechaTelas)obj;
+			if(!ls.abre.equals(this.abre)){
+				return false;
+			}
+			if(!ls.fecha.equals(this.fecha)){
+				return false;
+			}
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	public String toString(){
+		return "abre: "+this.abre + " e fecha: " + this.fecha.getClass();
+	}
+	public int hashCode(){
+		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+	       
+        ret = 7 * ret + this.abre.hashCode();
+        ret = 7 * ret + this.fecha.hashCode();
+        return ret;
 	}
 
 }

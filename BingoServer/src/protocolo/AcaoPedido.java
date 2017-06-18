@@ -1,9 +1,11 @@
 package protocolo;
 
 import bd.BD;
+import bd.dbos.Cartela;
 import bd.dbos.User;
-import programa.IniciadorJogo;
 import programa.Programa;
+import server.ServidorNovo;
+import server.Sorteio;
 
 public enum AcaoPedido {
 	NewUser(1),
@@ -42,8 +44,6 @@ public enum AcaoPedido {
 					break;
 				case 2:
 					try{
-						//IniciadorJogo jogo = new IniciadorJogo();
-						//int porta = jogo.iniciaJogo();
 						AcaoResposta acao = AcaoResposta.IniciarJogo;
 						ret = new ProtocoloResposta(null,acao, "JogoIniciando", true,proto.getIP());
 					}catch(Exception e){
@@ -64,6 +64,23 @@ public enum AcaoPedido {
 					}
 					break;
 				case 4:
+					Cartela c = (Cartela) proto.getObj();
+					ServidorNovo.pausaJogo();
+					if(c.verificaNumeros(Sorteio.getNumeros())){
+						//Ganhou!
+						AcaoResposta acao = AcaoResposta.FinalizaJogo;
+						ProtocoloResposta retAll = new ProtocoloResposta(null,AcaoResposta.Ganhador, "Ganhador do jogo foi: "+c.getDono().getNome(), true,null);
+						ServidorNovo.enviaMensagemJogando(retAll);
+						ret = new ProtocoloResposta (null,acao, "Voce ganhou!", true,proto.getIP());
+					}else{
+						//Errado!
+						AcaoResposta acao = AcaoResposta.VoltaJogo;
+						ProtocoloResposta retAll = new ProtocoloResposta(null,acao, "Alarme falso", true,null);
+						ServidorNovo.enviaMensagemJogando(retAll);
+						ret = new ProtocoloResposta (null,AcaoResposta.Errou, "Voce ainda não ganhou ganhou!", true,proto.getIP());
+						ServidorNovo.voltaJogo();
+					}
+					
 					break;
 				case 5:
 					try{

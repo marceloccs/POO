@@ -1,8 +1,13 @@
 package bd.dbos;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Cartela {
+public class Cartela implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3461566463391809929L;
 	private User dono;
 	private String cartela[][] = new String[5][5];
 	private Vector <String> selecionados = new Vector <String> (25);

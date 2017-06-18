@@ -7,9 +7,11 @@ import bd.dbos.Cartela;
 import bd.dbos.User;
 import bingo.BingoPanel;
 import bingo.CadastrarPanel;
-import cliente.ClienteNormal;
+import bingo.HomePanel;
+import cliente.ClienteNovo;
 import cliente.Constants;
 import protocolo.AcaoPedido;
+import protocolo.AcaoResposta;
 import protocolo.ProtocoloPedido;
 import protocolo.ProtocoloResposta;
 
@@ -20,20 +22,58 @@ public class ListenerCompletaCartela implements ActionListener {
 		this.view=view;
 	}
 	
+	public ListenerCompletaCartela(ListenerCompletaCartela listenerCompletaCartela) {
+		this.view = listenerCompletaCartela.view;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		try {
 			Cartela cartela = this.view.getCartela();
+			this.view.paraThread();
 			Constants cons = new Constants();
 			ProtocoloPedido protocolo = new ProtocoloPedido(cartela, AcaoPedido.Ganhou, cons.getIP());
-			ClienteNormal cli = new ClienteNormal(protocolo);
-			//ProtocoloResposta ret = cli.realizapedido();
+			
+			ProtocoloResposta ret = ClienteNovo.realizapedido(protocolo);
 			//ret.getIP();
-			//this.view.printa(ret.getMensagem());
+			this.view.printaInfo(ret.getMensagem());
+			if(ret.getStatus()==AcaoResposta.Ganhador){
+				//new HomePanel().setVisible(false);
+			}
+			if(ret.getStatus()==AcaoResposta.Errou){
+				//new HomePanel().setVisible(false);
+				this.view.printaInfo("mano!!!");
+			}
 			//this.view.bloqueiCaixas();
 		} catch (Exception e) {
 			//this.view.printa(e.getMessage());
 		}
 
+	}
+	public String toString(){
+		return "referece a pagina: "+this.view.getClass();
+	}
+	public Object clone(){
+		return new ListenerCompletaCartela(this);
+	}
+	public boolean equals(Object obj){
+		try{
+			if(this == obj)
+				return true;
+			ListenerCompletaCartela ls = (ListenerCompletaCartela)obj;
+			if(!ls.view.equals(this.view)){
+				return false;
+			}
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	public int hashCode(){
+		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+	       
+        ret = 7 * ret + this.view.hashCode();
+        return ret;
 	}
 }

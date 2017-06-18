@@ -43,8 +43,8 @@ public class CadastrarPanel extends javax.swing.JFrame {
      */ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    ListenerAbreFechaTelas abreCadastrar = new ListenerAbreFechaTelas(this,"HomePanel");
-    ListenerCreateUser createUser = new ListenerCreateUser(this);
+    private ListenerAbreFechaTelas abreCadastrar = new ListenerAbreFechaTelas(this,"HomePanel");
+    private ListenerCreateUser createUser = new ListenerCreateUser(this);
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,5 +172,73 @@ public class CadastrarPanel extends javax.swing.JFrame {
 		this.email.setEnabled(false);
 		this.nome.setEnabled(false);
 		this.passwordField.setEnabled(false);
+	}
+
+	@Override
+	public String toString() {
+		return "CadastrarPanel [email=" + email + ", nome=" + nome + ", passwordField=" + passwordField + ", resposta="
+				+ resposta + ", btnCancelar=" + btnCancelar + ", abreCadastrar=" + abreCadastrar + ", createUser="
+				+ createUser + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((abreCadastrar == null) ? 0 : abreCadastrar.hashCode());
+		result = prime * result + ((btnCancelar == null) ? 0 : btnCancelar.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((passwordField == null) ? 0 : passwordField.hashCode());
+		result = prime * result + ((resposta == null) ? 0 : resposta.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CadastrarPanel other = (CadastrarPanel) obj;
+		if (abreCadastrar == null) {
+			if (other.abreCadastrar != null)
+				return false;
+		} else if (!abreCadastrar.equals(other.abreCadastrar))
+			return false;
+		if (btnCancelar == null) {
+			if (other.btnCancelar != null)
+				return false;
+		} else if (!btnCancelar.equals(other.btnCancelar))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (passwordField == null) {
+			if (other.passwordField != null)
+				return false;
+		} else if (!passwordField.equals(other.passwordField))
+			return false;
+		if (resposta == null) {
+			if (other.resposta != null)
+				return false;
+		} else if (!resposta.equals(other.resposta))
+			return false;
+		return true;
 	}
 }

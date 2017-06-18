@@ -2,8 +2,7 @@ package programa;
 
 import bd.*;
 import bd.dbos.*;
-import server.Servidor;
-import server.ServidorJogo;
+import server.ServidorNovo;
 import server.Sorteio;
 
 public class Programa
@@ -15,12 +14,9 @@ public class Programa
             //User user = new User (11,"johns","j.zinho@gmail.com","jocker");
             //BD.USERS.excluir(11);
             //System.out.println(BD.JOGOS.pegarUltimoMes().toString());
-        	Servidor s = new Servidor(9999); 
+        	ServidorNovo s = new ServidorNovo(9999); 
         	Thread t = new Thread (s);
         	t.start();
-        	ServidorJogo sj = new ServidorJogo(6666); 
-        	Thread tj = new Thread (sj);
-        	tj.start();
         	
         }
         catch (Exception erro)

@@ -9,14 +9,15 @@ import javax.swing.border.EmptyBorder;
 
 import bd.dbos.Cartela;
 import bd.dbos.User;
-import cliente.ClienteBingo;
-import cliente.ClienteNormal;
+import cliente.ClienteNovo;
+import cliente.PegadorMensagensBingo;
 import listener.ListenerCompletaCartela;
 import listener.ListenerSelecionaDeselecionaBotao;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
@@ -52,6 +53,8 @@ public class BingoPanel extends JFrame {
 	private int ultimoBotao=-1;
 	private JButton btnBingo;
 	private JTextArea saida;
+	private PegadorMensagensBingo mensageiro  = new PegadorMensagensBingo(ClienteNovo.getEntrada(), this);
+	private Thread t = new Thread(mensageiro);
 	/**
 	 * Launch the application.
 	 */
@@ -68,6 +71,7 @@ public class BingoPanel extends JFrame {
 		});
 	}
 	ListenerCompletaCartela completa = new ListenerCompletaCartela(this); 
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the frame.
@@ -77,16 +81,16 @@ public class BingoPanel extends JFrame {
 		setResizable(false);
 		setTitle("PRENCHA SUA CARTELA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 279, 410);
+		setBounds(100, 100, 310, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setBounds(12, 51, 253, 194);
+		buttonPanel.setBounds(12, 51, 282, 194);
 		
 		this.btnBingo = new JButton("Bingo");
-		this.btnBingo.setBounds(12, 12, 253, 34);
+		this.btnBingo.setBounds(12, 12, 282, 34);
 		this.btnBingo.addActionListener(completa);
 		
 		
@@ -94,12 +98,16 @@ public class BingoPanel extends JFrame {
 		int min=1;
 		String  numerosSorteados[][] = new String[5][5];
 		Vector <String> numerosJaAdd = new Vector<String>(24);
+		int posicaoX=0;
+		int posicaoY=0;
+		int width = 38;
+		int heigth = 56;
+		int linhas=0;
 		for(int i=0;i<5;i++){
 			for(int j=0;j<5;j++){
 				if((i==2)&&(j==2)){
 					numerosSorteados[i][j] = "Bingo";
 					JToggleButton button = new JToggleButton("Bingo");
-					button.setSize(64,45);
 					button.addActionListener(new ListenerSelecionaDeselecionaBotao(this,button));
 					buttonPanel.add(button);
 					this.ultimoBotao++;
@@ -112,7 +120,15 @@ public class BingoPanel extends JFrame {
 							numerosJaAdd.add(randomNum.toString());
 							numerosSorteados[i][j] =randomNum.toString();
 							JToggleButton button = new JToggleButton(new Integer(randomNum).toString());
-							button.setSize(64,38);
+							button.setSize(heigth,width);
+							button.setAlignmentX(posicaoX);
+							button.setAlignmentY(posicaoY);
+							posicaoX+=width;
+							linhas++;
+							if(linhas==5){
+								posicaoX=0;
+								posicaoY+=heigth;
+							}
 							button.addActionListener(new ListenerSelecionaDeselecionaBotao(this,button));
 							buttonPanel.add(button);
 							this.ultimoBotao++;
@@ -126,18 +142,18 @@ public class BingoPanel extends JFrame {
 		this.cartela = new Cartela(numerosSorteados,dono);
 		contentPane.setLayout(null);
 		contentPane.add(buttonPanel);
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.add(btnBingo);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 256, 253, 114);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 256, 284, 112);
 		contentPane.add(scrollPane);
 		this.saida = new JTextArea();
-		this.saida.setEditable(false);
 		scrollPane.setViewportView(saida);
+		saida.setText("Resultado do sorteio:");
+		this.saida.setEditable(false);
 		this.desabilitaButton();
-		ClienteBingo bin = new ClienteBingo(null,this); 
-		Thread t = new Thread(bin);
-		t.start();
+		this.t.start();
 		this.habilitaButton();
 	}
 	public void selecioneBotao(String valor){
@@ -163,5 +179,85 @@ public class BingoPanel extends JFrame {
 	}
 	public void printaInfo(String s){
 		this.saida.setText(this.saida.getText()+"\n"+s);
+	}
+	public void paraThread(){
+		this.mensageiro.parar();
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(botoes);
+		result = prime * result + ((btnBingo == null) ? 0 : btnBingo.hashCode());
+		result = prime * result + ((cartela == null) ? 0 : cartela.hashCode());
+		result = prime * result + ((completa == null) ? 0 : completa.hashCode());
+		result = prime * result + ((contentPane == null) ? 0 : contentPane.hashCode());
+		result = prime * result + ((mensageiro == null) ? 0 : mensageiro.hashCode());
+		result = prime * result + ((saida == null) ? 0 : saida.hashCode());
+		result = prime * result + ((scrollPane == null) ? 0 : scrollPane.hashCode());
+		result = prime * result + ((t == null) ? 0 : t.hashCode());
+		result = prime * result + ultimoBotao;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BingoPanel other = (BingoPanel) obj;
+		if (!Arrays.equals(botoes, other.botoes))
+			return false;
+		if (btnBingo == null) {
+			if (other.btnBingo != null)
+				return false;
+		} else if (!btnBingo.equals(other.btnBingo))
+			return false;
+		if (cartela == null) {
+			if (other.cartela != null)
+				return false;
+		} else if (!cartela.equals(other.cartela))
+			return false;
+		if (completa == null) {
+			if (other.completa != null)
+				return false;
+		} else if (!completa.equals(other.completa))
+			return false;
+		if (contentPane == null) {
+			if (other.contentPane != null)
+				return false;
+		} else if (!contentPane.equals(other.contentPane))
+			return false;
+		if (mensageiro == null) {
+			if (other.mensageiro != null)
+				return false;
+		} else if (!mensageiro.equals(other.mensageiro))
+			return false;
+		if (saida == null) {
+			if (other.saida != null)
+				return false;
+		} else if (!saida.equals(other.saida))
+			return false;
+		if (scrollPane == null) {
+			if (other.scrollPane != null)
+				return false;
+		} else if (!scrollPane.equals(other.scrollPane))
+			return false;
+		if (t == null) {
+			if (other.t != null)
+				return false;
+		} else if (!t.equals(other.t))
+			return false;
+		if (ultimoBotao != other.ultimoBotao)
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "BingoPanel [contentPane=" + contentPane + ", cartela=" + cartela + ", botoes=" + Arrays.toString(botoes)
+				+ ", ultimoBotao=" + ultimoBotao + ", btnBingo=" + btnBingo + ", saida=" + saida + ", mensageiro="
+				+ mensageiro + ", t=" + t + ", completa=" + completa + ", scrollPane=" + scrollPane + "]";
 	}
 }

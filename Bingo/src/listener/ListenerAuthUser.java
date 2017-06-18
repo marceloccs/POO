@@ -7,7 +7,7 @@ import bd.dbos.User;
 import bingo.BingoPanel;
 import bingo.CadastrarPanel;
 import bingo.HomePanel;
-import cliente.ClienteNormal;
+import cliente.ClienteNovo;
 import cliente.Constants;
 import protocolo.AcaoPedido;
 import protocolo.ProtocoloPedido;
@@ -20,6 +20,10 @@ public class ListenerAuthUser implements ActionListener {
 		this.view=view;
 	}
 	
+	public ListenerAuthUser(ListenerAuthUser listenerAuthUser) {
+		this.view = listenerAuthUser.view;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		//this.view.bloqueiCaixas();
@@ -28,12 +32,12 @@ public class ListenerAuthUser implements ActionListener {
 			System.out.println(user.toString());
 			Constants cons = new Constants();
 			ProtocoloPedido protocolo = new ProtocoloPedido(user, AcaoPedido.Ath, cons.getIP());
-			ClienteNormal cli = new ClienteNormal(protocolo);
-			ProtocoloResposta ret = cli.realizapedido();
+			//ClienteNormal cli = new ClienteNormal(protocolo);
+			ProtocoloResposta ret = ClienteNovo.realizapedido(protocolo);
 			if(ret.getSucesso()==true){
 				ProtocoloPedido protocoloJogo = new ProtocoloPedido(null, AcaoPedido.IniciarJogo, cons.getIP());
-				ClienteNormal cliJogo = new ClienteNormal(protocoloJogo);
-				ProtocoloResposta retJogo = cliJogo.realizapedido();
+				//ClienteNormal cliJogo = new ClienteNormal(protocoloJogo);
+				ProtocoloResposta retJogo = ClienteNovo.realizapedido(protocoloJogo);
 				if(retJogo.getSucesso()==true){
 					new BingoPanel((User)ret.getObjeto()).setVisible(true);
 					this.view.dispose();
@@ -51,5 +55,31 @@ public class ListenerAuthUser implements ActionListener {
 			this.view.printa(e.getMessage());
 		}
 
+	}
+	public String toString(){
+		return "classe que authfica user";
+	}
+	public Object clone(){
+		return new ListenerAuthUser(this);
+	}
+	public boolean equals(Object obj){
+		try{
+			if(this == obj)
+				return true;
+			ListenerAuthUser ls = (ListenerAuthUser)obj;
+			if(!ls.view.equals(this.view)){
+				return false;
+			}
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	public int hashCode(){
+		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
+	       
+        ret = 7 * ret + this.view.hashCode();
+        return ret;
 	}
 }
