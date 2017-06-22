@@ -31,6 +31,7 @@ public class ListenerCompletaCartela implements ActionListener {
 		try {
 			Cartela cartela = this.view.getCartela();
 			this.view.paraThread();
+			this.view.desabilitaButton();
 			Constants cons = new Constants();
 			ProtocoloPedido protocolo = new ProtocoloPedido(cartela, AcaoPedido.Ganhou, cons.getIP());
 			
@@ -38,15 +39,20 @@ public class ListenerCompletaCartela implements ActionListener {
 			//ret.getIP();
 			this.view.printaInfo(ret.getMensagem());
 			if(ret.getStatus()==AcaoResposta.Ganhador){
+				this.view.desabilitaButton();
 				//new HomePanel().setVisible(false);
 			}
 			if(ret.getStatus()==AcaoResposta.Errou){
 				//new HomePanel().setVisible(false);
-				this.view.printaInfo("mano!!!");
+				//this.view.printaInfo("mano!!!");
+				this.view.habilitaButton();
 			}
 			//this.view.bloqueiCaixas();
 		} catch (Exception e) {
-			//this.view.printa(e.getMessage());
+			this.view.habilitaButton();
+			this.view.printaInfo(e.getMessage());
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
 		}
 
 	}
@@ -73,7 +79,7 @@ public class ListenerCompletaCartela implements ActionListener {
 	public int hashCode(){
 		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
 	       
-        ret = 7 * ret + this.view.hashCode();
+        //ret = 7 * ret + this.view.hashCode();
         return ret;
 	}
 }

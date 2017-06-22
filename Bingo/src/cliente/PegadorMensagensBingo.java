@@ -81,7 +81,7 @@ public class PegadorMensagensBingo implements Runnable{
 	public int hashCode(){
 		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
 	       
-        ret = 7 * ret + this.view.hashCode();
+        //ret = 7 * ret + this.view.hashCode();
         ret = 7 * ret + this.receptor.hashCode();
         ret = 7 * ret + new Boolean(this.runner).hashCode();
         return ret;

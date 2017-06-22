@@ -17,7 +17,7 @@ public class ClienteNovo {
 	   
 	   public ClienteNovo (String entrada2) throws Exception {
 		   String host ="";
-		   if(entrada2==null)
+		   if(entrada2!=null)
 			   host=entrada2;
 		   else
 			   host = Constants.host;
@@ -27,7 +27,12 @@ public class ClienteNovo {
 		   ClienteNovo.entrada = new ObjectInputStream(ClienteNovo.socket.getInputStream());
 	   }
 
-	   public static ProtocoloResposta realizapedido(ProtocoloPedido per) throws Exception{
+	   @Override
+	public String toString() {
+		return "Socket porta: "+this.socket.getPort()+", host: "+this.socket.getRemoteSocketAddress();
+	}
+
+	public static ProtocoloResposta realizapedido(ProtocoloPedido per) throws Exception{
 		 ProtocoloResposta retorno = null;
 		 try{
 	     

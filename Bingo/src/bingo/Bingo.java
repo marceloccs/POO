@@ -26,6 +26,7 @@ public class Bingo {
     		System.out.println("Escreva o IP do servidor: \n");
     		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     		String entrada = in.readLine();
+    		System.out.println(entrada);
 			new ClienteNovo(entrada);
 			new HomePanel().setVisible(true);
 		} catch (Exception e) {

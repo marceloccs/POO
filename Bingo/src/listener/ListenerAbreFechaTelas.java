@@ -35,32 +35,39 @@ public class ListenerAbreFechaTelas implements ActionListener {
 	public Object clone(){
 		return new ListenerAbreFechaTelas(this);
 	}
-	public boolean equals(Object obj){
-		try{
-			if(this == obj)
-				return true;
-			ListenerAbreFechaTelas ls = (ListenerAbreFechaTelas)obj;
-			if(!ls.abre.equals(this.abre)){
-				return false;
-			}
-			if(!ls.fecha.equals(this.fecha)){
-				return false;
-			}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((abre == null) ? 0 : abre.hashCode());
+		//result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}catch(Exception e){
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
+		ListenerAbreFechaTelas other = (ListenerAbreFechaTelas) obj;
+		if (abre == null) {
+			if (other.abre != null)
+				return false;
+		} else if (!abre.equals(other.abre))
+			return false;
+		if (fecha == null) {
+			if (other.fecha != null)
+				return false;
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		return true;
 	}
 	public String toString(){
 		return "abre: "+this.abre + " e fecha: " + this.fecha.getClass();
 	}
-	public int hashCode(){
-		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
-	       
-        ret = 7 * ret + this.abre.hashCode();
-        ret = 7 * ret + this.fecha.hashCode();
-        return ret;
-	}
+	
 
 }
 

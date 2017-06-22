@@ -79,7 +79,7 @@ public class ListenerAuthUser implements ActionListener {
 	public int hashCode(){
 		int ret = 666; //qualquer numero, não zero e intero, desde que sua classe não herde de nenhuma classe
 	       
-        ret = 7 * ret + this.view.hashCode();
+        //ret = 7 * ret + this.view.hashCode();
         return ret;
 	}
 }
